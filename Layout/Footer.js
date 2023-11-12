@@ -30,7 +30,7 @@ function FooterNavigation() {
         <View style={styles.footerWrapper}>
             {footerIcons.map((icon) => 
                 <FooterItem
-                    id = {icon.id}
+                    key = {icon.id}
                     image = {icon.image}
                     text = {icon.text}
                 />

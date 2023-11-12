@@ -3,7 +3,7 @@ import { StyleSheet, Text, Image, Pressable } from "react-native";
 
 function FooterItem(props) {
     return(
-        <Pressable key={props.id} style={styles.footerItemWrapper}>
+        <Pressable style={styles.footerItemWrapper}>
             <Image source={props.image} />
             <Text style={styles.text}>{props.text}</Text>
         </Pressable>

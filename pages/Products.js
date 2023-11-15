@@ -41,7 +41,7 @@ const products = [
 
 function Products() {
     return(
-        <View >
+        <View style={{backgroundColor: "#100156"}} >
             <FlatList 
                 data={products}
                 renderItem={(product) => {

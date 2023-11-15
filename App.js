@@ -1,14 +1,15 @@
 import { StyleSheet, View } from 'react-native';
-import MainContent from './Layout/MainContent';
 import FooterNavigation from './Layout/Footer';
 import HeaderNavigation from './Layout/Header';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Products from './pages/Products';
+import ProductDetails from './pages/ProductDetails';
 
 function HomeScreen() {
   return (
-    <MainContent />
+    <ProductDetails />
   );
 }
 

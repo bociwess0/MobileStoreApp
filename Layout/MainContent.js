@@ -1,18 +1,12 @@
-import { StyleSheet, View } from 'react-native';
+import {View } from 'react-native';
 import Products from '../pages/Products';
 
 
 function MainContent() {
     return(
-        <Products />
+        <View style={{backgroundColor: "#100156"}}>
+            <Products />
+        </View>
     )
 }
-
-const styles = StyleSheet.create({
-    mainContentWrapper: {
-      flex: 1,
-
-    },
-});
-
 export default MainContent;

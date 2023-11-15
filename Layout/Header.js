@@ -14,7 +14,6 @@ function HeaderNavigation() {
 
 const styles = StyleSheet.create({
     headerWrapper: {
-        backgroundColor: "#0B003C",
         borderBottomColor: "#33363D",
         width: "100%",
         height: 60,
@@ -23,7 +22,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingRight: 30,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -31,8 +30,8 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.30,
         shadowRadius: 4.65,
-
         elevation: 8,
+        backgroundColor: "#0B003C"
     }
 });
 

@@ -1,5 +1,7 @@
 import { View, StyleSheet, FlatList } from "react-native";
 import ProductItem from "../components/ProductList/ProductItem";
+
+
 const products = [
     {
         id: 1,
@@ -36,9 +38,11 @@ const products = [
     }, 
 ]
 
+
 function Products() {
     return(
-        <FlatList 
+        <View >
+            <FlatList 
                 data={products}
                 renderItem={(product) => {
                         return(
@@ -50,7 +54,9 @@ function Products() {
                 }
                 keyExtractor={item => item.id}
                 style={styles.productsWrapper}
-        />
+            />
+      </View>
+
     )
 }
 

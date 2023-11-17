@@ -1,6 +1,7 @@
 import { Animated, FlatList, StyleSheet, View } from "react-native";
 import SliderItem from "./Slider/SliderItem";
 import { useRef, useState } from "react";
+import Pagination from "./Slider/Pagination";
 
 function ProductImageSlider(props) {
 
@@ -44,7 +45,7 @@ function ProductImageSlider(props) {
                 }
                 keyExtractor={image => image.id}
                 horizontal
-                showsHorizontalScrollIndicator
+                showsHorizontalScrollIndicator={false}
                 pagingEnabled
                 bounces={false}
 
@@ -56,6 +57,7 @@ function ProductImageSlider(props) {
                 onViewableItemsChanged={viewableItemsChanged}
                 ref={slideRef}
             />
+            <Pagination slides={images} scrollX={scrollX} />
         </View>
     )
 }
@@ -63,7 +65,7 @@ function ProductImageSlider(props) {
 const styles = StyleSheet.create({
     imageSliderWrapper: {
         width: "100%",
-        height: "50%",
+        height: "50%",        
     }
 })
 

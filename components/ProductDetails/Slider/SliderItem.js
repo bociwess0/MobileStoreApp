@@ -1,9 +1,11 @@
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, useWindowDimensions } from "react-native";
 
 function SliderItem(props) {
 
+    const {width} = useWindowDimensions();
+
     return(
-        <View style={styles.sliderItemWrapper}>
+        <View style={[styles.sliderItemWrapper, {width}]}>
             <Image style={styles.image} source={props.image} />
         </View>
     )
@@ -16,12 +18,13 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems: "center",
         flex: 1,
-        backgroundColor: "#8251F0"
+        backgroundColor: "#20203b"
     },
     image: {
         resizeMode: "stretch",
         width: 200,
-        height: 200
+        height: 200,
+        borderRadius: 20
     }
 })
 

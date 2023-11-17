@@ -9,7 +9,7 @@ import ProductDetails from './pages/ProductDetails';
 
 function HomeScreen() {
   return (
-    <ProductDetails />
+    <Products />
   );
 }
 

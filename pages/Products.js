@@ -9,7 +9,11 @@ const products = [
         brand: "Apple",
         price: 895,
         colors: ["red"],
-        image: require("../assets/Products/iphone-15.jpg")
+        images: [
+            require("../assets/Products/iphone-15.jpg"),
+            require("../assets/Products/iphone-15-2.jpg"),
+            require("../assets/Products/iphone-15-3.jpg")
+        ]
 
     }, 
     {
@@ -18,7 +22,11 @@ const products = [
         brand: "Samsung",
         price: 895,
         colors: ["black", "white"],
-        image: require("../assets/Products/galaxy-s23.jpg")
+        images: [
+            require("../assets/Products/galaxy-s23.jpg"),
+            require("../assets/Products/galaxy-s23-2.png"),
+            require("../assets/Products/galaxy-s23-3.png")
+        ]
     }, 
     {
         id: 3,
@@ -26,7 +34,11 @@ const products = [
         brand: "Xiaomi",
         price: 1000,
         colors: ["green"],
-        image: require("../assets/Products/xiaomi-14-pro.jpg")
+        images: [
+            require("../assets/Products/xiaomi-14-pro.jpg"),
+            require("../assets/Products/xiaomi-14-pro-2.jpg"),
+            require("../assets/Products/xiaomi-14-pro-3.png")
+        ]
     }, 
     {
         id: 4,
@@ -34,7 +46,11 @@ const products = [
         brand: "Huawei",
         price: 990,
         colors: ["gray"],
-        image: require("../assets/Products/huawei-mate-60-pro.jpg")
+        images: [
+            require("../assets/Products/huawei-mate-60-pro.jpg"),
+            require("../assets/Products/huawei-mate-60-pro-2.png"),
+            require("../assets/Products/huawei-mate-60-pro-3.png"),
+        ]
     }, 
 ]
 

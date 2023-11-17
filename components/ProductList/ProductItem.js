@@ -6,11 +6,16 @@ function ProductItem(props) {
     return(
         <View style={styles.productItemWrapper}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={props.item.item.image} />
+                <Image style={styles.image} source={props.item.item.images[1]} />
             </View>
             <View style={styles.textWrapper}>
                 <Text style={styles.title} >{props.item.item.title}</Text>
-                <Text style={styles.brand} >{props.item.item.brand}</Text>
+                <View style={styles.brandAndViewMore}>
+                    <Text style={styles.brand} >{props.item.item.brand}</Text>
+                    <Pressable style={styles.viewMore}>
+                        <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
+                    </Pressable>
+                </View>
                 <SelectDropdown 
                     data={props.item.item.colors}
                     defaultValue="Choose color"
@@ -80,7 +85,14 @@ const styles = StyleSheet.create({
     title: {
         color: "#fff",
         fontSize: 16
-    }, 
+    },
+    
+    brandAndViewMore: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between"
+    },
+    
     brand: {
         color: "#fff",
         fontSize: 14

@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         alignItems: "center",
         flex: 1,
-        backgroundColor: "#20203b"
+        backgroundColor: "#232442"
     },
     image: {
         resizeMode: "stretch",

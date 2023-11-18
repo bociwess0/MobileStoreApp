@@ -33,6 +33,7 @@ function FooterNavigation() {
                     key = {icon.id}
                     image = {icon.image}
                     text = {icon.text}
+                    id = {icon.id}
                 />
                 )}
         </View>

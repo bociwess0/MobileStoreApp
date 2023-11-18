@@ -3,6 +3,7 @@ import { Animated, StyleSheet, View, useWindowDimensions } from "react-native";
 function Pagination(props) {
 
     const {width} = useWindowDimensions();
+    
 
     return (
         <View style={styles.dotsWrapper}>
@@ -17,7 +18,7 @@ function Pagination(props) {
                 })
 
 
-                return <Animated.View style={[styles.dot, {backgroundColor}]} key = {dotItem.id} />
+                return <Animated.View style={[styles.dot, {backgroundColor}]} key = {Math.random().toString()} />
             })}
         </View>
     )

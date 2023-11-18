@@ -65,7 +65,7 @@ function ProductImageSlider(props) {
 const styles = StyleSheet.create({
     imageSliderWrapper: {
         width: "100%",
-        height: "50%",        
+        height: "42%",        
     }
 })
 

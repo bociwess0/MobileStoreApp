@@ -32,9 +32,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
-        height: 50,
         backgroundColor: "#232442",
-        width: "100%"
+        width: "100%",
+        paddingBottom: 20
     },
 
     dot: {

@@ -11,8 +11,6 @@ function ProductDetails(props) {
     )
 }
 
-// background: linear-gradient(to top right, #8251F0, #F67E2E)
-
 const styles = StyleSheet.create({
     productDetailWrapper: {
         display: "flex",

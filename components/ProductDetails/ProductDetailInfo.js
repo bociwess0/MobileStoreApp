@@ -3,18 +3,21 @@ import SelectDropdown from "react-native-select-dropdown";
 import Quantity from "./ChooseQuantity/Quantity";
 
 function ProductDetailInfo(props) {
+
+    const selectedItem = props.item;
+
     return(
         <View style={styles.detailInfoWrapper}>
             <View style={styles.titleAndFavorites}>
-                <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>Iphone 15</Text>
+                <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>{selectedItem.title}</Text>
                 <Pressable>
                     <Image style={{width: 30, height: 30}} source={require("../../assets/Products/favorites_icon.png")} />
                 </Pressable>
             </View>
             <View style={styles.brandAndColor}>
-                <Text style={{fontSize: 16, color: "#fff", marginTop: 10}}>Apple</Text>
+                <Text style={{fontSize: 16, color: "#fff", marginTop: 10}}>{selectedItem.brand}</Text>
                 <SelectDropdown 
-                        data={["red", "green"]}
+                        data={selectedItem.colors}
                         defaultValue="Choose color"
                         buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 150, marginTop: 15}}
                         buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
@@ -23,15 +26,12 @@ function ProductDetailInfo(props) {
             <View style={styles.descriptionWrapper}>
                 <Text style={{fontSize: 16, color: "#fff", marginTop: 10, marginBottom: 5}}>Description</Text>
                 <Text numberOfLines={3} ellipsizeMode="tail" style={{color: "#afb0ae", fontSize:14, marginBottom: 10}}>
-                        The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) 
-                        that doesn't distract from the layout.The purpose of lorem ipsum is to create a natural looking block of text
-                        (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy,
-                        laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.
+                    {selectedItem.description}
                 </Text>
                 <Quantity />
             </View>
             <View style={styles.priceAndButton}>
-                    <Text style={{fontSize: 26, color:"#fff"}}>{`960€`}</Text>
+                    <Text style={{fontSize: 26, color:"#fff"}}>{`${selectedItem.price}€`}</Text>
                     <Pressable style={styles.addToCartButton}>
                         <Text style={{fontSize: 20, color: "#fff"}}>Add To Cart</Text>
                     </Pressable>

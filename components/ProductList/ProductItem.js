@@ -3,6 +3,11 @@ import SelectDropdown from "react-native-select-dropdown";
 
 
 function ProductItem(props) {
+
+    function NavigationHandler() {
+        props.navigation.navigate("ProductDetails");
+    }
+    
     return(
         <View style={styles.productItemWrapper}>
             <View style={styles.imageWrapper}>
@@ -12,7 +17,7 @@ function ProductItem(props) {
                 <Text style={styles.title} >{props.item.item.title}</Text>
                 <View style={styles.brandAndViewMore}>
                     <Text style={styles.brand} >{props.item.item.brand}</Text>
-                    <Pressable style={styles.viewMore}>
+                    <Pressable style={styles.viewMore} onPress={NavigationHandler}>
                         <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
                     </Pressable>
                 </View>

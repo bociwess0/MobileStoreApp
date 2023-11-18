@@ -7,14 +7,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 
-function HomeScreen() {
-  return (
-    <Products />
-  );
-}
 
 const Stack = createNativeStackNavigator();
-
 
 export default function App() {
   return (
@@ -23,8 +17,17 @@ export default function App() {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen 
-              name="Home"
-              component={HomeScreen}
+              name="Products"
+              component={Products}
+              options={{ 
+                headerTitle: () => <HeaderNavigation />,
+                headerStyle: {backgroundColor: "#0B003C"},
+              }} 
+              
+            />
+            <Stack.Screen 
+              name="ProductDetails"
+              component={ProductDetails}
               options={{ 
                 headerTitle: () => <HeaderNavigation />,
                 headerStyle: {backgroundColor: "#0B003C"},

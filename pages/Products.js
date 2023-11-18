@@ -55,7 +55,7 @@ const products = [
 ]
 
 
-function Products() {
+function Products({navigation}) {
     return(
         <View style={{backgroundColor: "#100156"}} >
             <FlatList 
@@ -64,6 +64,7 @@ function Products() {
                         return(
                             <ProductItem
                                 item = {product}
+                                navigation = {navigation}
                             />
                         )
                     }

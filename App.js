@@ -15,24 +15,19 @@ export default function App() {
     <View style={styles.appContainer}>
       <View style={styles.mainContentWrapper}>
         <NavigationContainer>
-          <Stack.Navigator>
+          <Stack.Navigator screenOptions={{ 
+              headerLeft: () => null,
+              headerTitle: () => <HeaderNavigation />,
+              headerStyle: {backgroundColor: "#0B003C"},
+            }} 
+            >
             <Stack.Screen 
               name="Products"
               component={Products}
-              options={{ 
-                headerTitle: () => <HeaderNavigation />,
-                headerStyle: {backgroundColor: "#0B003C"},
-              }} 
-              
             />
             <Stack.Screen 
               name="ProductDetails"
               component={ProductDetails}
-              options={{ 
-                headerTitle: () => <HeaderNavigation />,
-                headerStyle: {backgroundColor: "#0B003C"},
-              }} 
-              
             />
           </Stack.Navigator>
         </NavigationContainer>

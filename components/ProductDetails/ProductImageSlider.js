@@ -4,31 +4,12 @@ import { useRef, useState } from "react";
 import Pagination from "./Slider/Pagination";
 
 function ProductImageSlider(props) {
-
-    const images = [
-        {
-            id: 1,
-            src: require("../../assets/Products/iphone-15.jpg")
-        },
-        {
-            id: 2,
-            src: require("../../assets/Products/iphone-15-2.jpg")
-        },
-        {
-            id: 3,
-            src: require("../../assets/Products/iphone-15-3.jpg")
-        },
-
-    ]
+    
+    const images = props.item.images;
 
     const [currentIndex, setCurrentIndex] = useState(0)
     const scrollX = useRef(new Animated.Value(0)).current;
     const slideRef = useRef(null)
-    const viewableItemsChanged = useRef(({viewableItems}) => {
-        setCurrentIndex(viewableItems[0].index)
-    }).current
-
-
 
 
     return(
@@ -38,12 +19,12 @@ function ProductImageSlider(props) {
                 renderItem={(image) => {
                         return(
                             <SliderItem
-                                image = {image.item.src}
+                                image = {image.item}
                             />
                         )
                     }
                 }
-                keyExtractor={image => image.id}
+                keyExtractor={image => image.item}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled
@@ -54,7 +35,6 @@ function ProductImageSlider(props) {
                 })}
                 scrollEventThrottle={32}
                 
-                onViewableItemsChanged={viewableItemsChanged}
                 ref={slideRef}
             />
             <Pagination slides={images} scrollX={scrollX} />

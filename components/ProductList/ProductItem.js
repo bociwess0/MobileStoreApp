@@ -5,7 +5,9 @@ import SelectDropdown from "react-native-select-dropdown";
 function ProductItem(props) {
 
     function NavigationHandler() {
-        props.navigation.navigate("ProductDetails");
+        props.navigation.navigate("ProductDetails", {
+            selectedItem: props.item.item
+        });
     }
     
     return(

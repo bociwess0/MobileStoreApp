@@ -6,13 +6,13 @@ function ProductDetailInfo(props) {
     return(
         <View style={styles.detailInfoWrapper}>
             <View style={styles.titleAndFavorites}>
-                <Text style={{fontSize: 28, color: "#fff"}}>Iphone 15</Text>
+                <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>Iphone 15</Text>
                 <Pressable>
                     <Image style={{width: 30, height: 30}} source={require("../../assets/Products/favorites_icon.png")} />
                 </Pressable>
             </View>
             <View style={styles.brandAndColor}>
-            <Text style={{fontSize: 16, color: "#fff"}}>Apple</Text>
+                <Text style={{fontSize: 16, color: "#fff", marginTop: 10}}>Apple</Text>
                 <SelectDropdown 
                         data={["red", "green"]}
                         defaultValue="Choose color"
@@ -20,14 +20,22 @@ function ProductDetailInfo(props) {
                         buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
                     />
             </View>
-            <Text style={{fontSize: 16, color: "#fff", marginTop: 10, marginBottom: 5}}>Description</Text>
-            <Text numberOfLines={3} ellipsizeMode="tail" style={{color: "#afb0ae", fontSize:14, marginBottom: 10}}>
-                    The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) 
-                    that doesn't distract from the layout.The purpose of lorem ipsum is to create a natural looking block of text
-                    (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy,
-                    laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.
-            </Text>
-            <Quantity />
+            <View style={styles.descriptionWrapper}>
+                <Text style={{fontSize: 16, color: "#fff", marginTop: 10, marginBottom: 5}}>Description</Text>
+                <Text numberOfLines={3} ellipsizeMode="tail" style={{color: "#afb0ae", fontSize:14, marginBottom: 10}}>
+                        The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) 
+                        that doesn't distract from the layout.The purpose of lorem ipsum is to create a natural looking block of text
+                        (sentence, paragraph, page, etc.) that doesn't distract from the layout. A practice not without controversy,
+                        laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content.
+                </Text>
+                <Quantity />
+            </View>
+            <View style={styles.priceAndButton}>
+                    <Text style={{fontSize: 26, color:"#fff"}}>{`960€`}</Text>
+                    <Pressable style={styles.addToCartButton}>
+                        <Text style={{fontSize: 20, color: "#fff"}}>Add To Cart</Text>
+                    </Pressable>
+                </View>
         </View>
     )
 }
@@ -48,7 +56,8 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         marginTop: 10,
-        marginBottom: 0
+        marginBottom: 0,
+        height: 30
     },
 
     brandAndColor: {
@@ -57,10 +66,35 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         width: "100%",
-        borderBottomColor: "#e2e2e2",
+        borderBottomColor: "rgba(242, 240, 240, 0.7)",
         borderBottomWidth: 1,
         paddingBottom: 10
-    }
+    },
+
+    descriptionWrapper: {
+        display: "flex",
+        flexDirection: "column",
+        width: "100%",
+        paddingBottom: 10
+    },
+
+    priceAndButton: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        gap: 30,
+        marginTop: 10
+    }, 
+    addToCartButton: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+        height: 40,
+        backgroundColor: "#B4236C",
+        width: 200
+    },
     
 })
 

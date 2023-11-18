@@ -22,7 +22,7 @@ function Quantity() {
             <Text style={{fontSize: 16, color: "#fff", marginRight: 20}}>Quantity:</Text>
             <View style={styles.productSizeWrapper}>
             <Pressable style={styles.quantityNumber}>
-                <Text style={{fontSize: 16, color: "#fff"}} onPress={reduceQuantityHandler}>-</Text>
+                <Text style={{fontSize: 16, color: "#fff"}} onPress={reduceQuantityHandler}>−</Text>
             </Pressable>
             <Text style={{fontSize: 16, color: "#fff"}} >{quantityNumber.toString()}</Text>
             <Pressable style={styles.quantityNumber}>

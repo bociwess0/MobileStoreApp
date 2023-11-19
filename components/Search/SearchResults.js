@@ -1,5 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import ProductItem from "../ProductList/ProductItem";
+import SearchItem from "./SearchItem";
 
 function SearchResults(props) {
 
@@ -10,7 +10,7 @@ function SearchResults(props) {
                 data={props.products}
                 renderItem={(product) => {
                         return(
-                            <ProductItem
+                            <SearchItem
                                 item = {product}
                             />
                         )

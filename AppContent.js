@@ -17,8 +17,8 @@ function AppContent() {
 
     return(
         <>
-            {searchOpen && <SearchModal /> }
-            {!searchOpen && <View style={styles.mainContentWrapper}>
+            
+            <View style={styles.mainContentWrapper}>
                     <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen 
@@ -42,10 +42,11 @@ function AppContent() {
                         
                         />
                     </Stack.Navigator>
+                    {searchOpen && <SearchModal /> }
                     </NavigationContainer>
                     <FooterNavigation />
                 </View>
-            }
+            
         </>
     )
 }

@@ -1,19 +1,22 @@
-import { useRef } from "react";
+import { useNavigation } from "@react-navigation/native";
 import { Image, Pressable, View, StyleSheet, Text } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
+import { useDispatch } from "react-redux";
+import { hideSearch } from "../../redux/searchSlice";
 
 
-function ProductItem(props) {
+function SearchItem(props) {
 
-    const itemRef = useRef();
-    function NavigationHandler() {
-        if(typeof props.navigation !== "undefined" && props.navigation !== null) {
-            props.navigation.navigate("ProductDetails", {
-                selectedItem: props.item.item
-            });
-        }
+    const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+    function handleNavigation() {
+        dispatch(hideSearch())
+        navigation.navigate("ProductDetails", {
+            selectedItem: props.item.item
+        })
     }
-    
+
     return(
         <View style={styles.productItemWrapper}>
             <View style={styles.imageWrapper}>
@@ -23,7 +26,7 @@ function ProductItem(props) {
                 <Text style={styles.title} >{props.item.item.title}</Text>
                 <View style={styles.brandAndViewMore}>
                     <Text style={styles.brand} >{props.item.item.brand}</Text>
-                    <Pressable style={styles.viewMore} ref={itemRef} onPress={NavigationHandler}>
+                    <Pressable style={styles.viewMore} onPress={handleNavigation} >
                         <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
                     </Pressable>
                 </View>
@@ -111,4 +114,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default ProductItem;
+export default SearchItem;

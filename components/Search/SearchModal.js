@@ -21,15 +21,14 @@ function SearchModal() {
     function searchReducer(state, action) {
         if(action.type === 'filterSearchProducts') {
             let resultProducts = [];
-            let enteredText = action.payload.text;
-            resultProducts = allProducts.filter((product) => (product.title.includes(enteredText) || product.brand.includes(enteredText)));
+            let enteredText = action.payload.text.toLowerCase();
+            resultProducts = allProducts.filter((product) => (product.title.toLowerCase().includes(enteredText) || product.brand.toLowerCase().includes(enteredText)));
             return resultProducts;
         }
     }
 
     const [searchInput, setSearchInput] = useState('');
-    const searchResults = allProducts
-    const [state, searchDispatch] = useReducer(searchReducer, searchResults)
+    const [state, searchDispatch] = useReducer(searchReducer, [])
 
     return(
         <Modal animationType="slide">

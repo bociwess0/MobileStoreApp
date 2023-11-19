@@ -7,7 +7,7 @@ function Pagination(props) {
 
     return (
         <View style={styles.dotsWrapper}>
-            {props.slides.map((dotItem, index) => {
+            {props.slides && props.slides.map((dotItem, index) => {
 
                 const inputRange = [(index - 1) * width, index * width, (index + 1) * width];
 

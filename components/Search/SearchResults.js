@@ -1,21 +1,17 @@
-import { View, StyleSheet, FlatList } from "react-native";
-import ProductItem from "../components/ProductList/ProductItem";
-import { allProducts } from "../components/ProductList/AllProducts";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import ProductItem from "../ProductList/ProductItem";
 
+function SearchResults(props) {
 
-const products = allProducts
-
-
-function Products({navigation}) {
     return(
-        <View style={{backgroundColor: "#100156"}} >
+        <View style={styles.productsWrapper} >
+            {/* <Text>dwadwawda</Text> */}
             <FlatList 
-                data={products}
+                data={props.products}
                 renderItem={(product) => {
                         return(
                             <ProductItem
                                 item = {product}
-                                navigation = {navigation}
                             />
                         )
                     }
@@ -23,20 +19,22 @@ function Products({navigation}) {
                 keyExtractor={item => item.id}
                 style={styles.productsWrapper}
             />
-      </View>
-
+        </View>
     )
 }
 
 const styles = StyleSheet.create({
+    searchResultsContainer: {
+        width: "100%",
+        height: "100%",
+        backgroundColor: "red"
+    },
     productsWrapper: {
         display: "flex",
         flexDirection: "column",
         gap: 20,
-        padding: 10,
-        width: "100%",
-        height: "100%"
+        padding: 5,
     },
 });
 
-export default Products;
+export default SearchResults;  

@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         position: "relative",
-        bottom: 20
     },
     text: {
         color: "#fff",

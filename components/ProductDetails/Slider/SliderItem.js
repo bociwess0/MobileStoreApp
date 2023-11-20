@@ -5,7 +5,7 @@ function SliderItem(props) {
     const {width} = useWindowDimensions();
 
     return(
-        <View style={[styles.sliderItemWrapper, {width}]}>
+        <View style={[styles.sliderItemWrapper, {width}]} key={Math.random().toString()}>
             <Image style={styles.image} source={props.image} />
         </View>
     )

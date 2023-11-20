@@ -43,8 +43,9 @@ function AppContent() {
                         />
                     </Stack.Navigator>
                     {searchOpen && <SearchModal /> }
-                    </NavigationContainer>
                     <FooterNavigation />
+
+                    </NavigationContainer>
                 </View>
             
         </>

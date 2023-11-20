@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList } from "react-native";
+import { View, StyleSheet, FlatList, useWindowDimensions } from "react-native";
 import ProductItem from "../components/ProductList/ProductItem";
 import { allProducts } from "../components/ProductList/AllProducts";
 
@@ -7,8 +7,11 @@ const products = allProducts
 
 
 function Products({navigation}) {
+
+    const {width, height} = useWindowDimensions();
+
     return(
-        <View style={{backgroundColor: "#100156"}} >
+        <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
             <FlatList 
                 data={products}
                 renderItem={(product) => {
@@ -21,7 +24,7 @@ function Products({navigation}) {
                     }
                 }
                 keyExtractor={item => item.id}
-                style={styles.productsWrapper}
+                style={[styles.productsWrapper, {height: height - 150}]}
             />
       </View>
 
@@ -34,8 +37,8 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 20,
         padding: 10,
+        paddingBottom: 20,
         width: "100%",
-        height: "100%"
     },
 });
 

@@ -6,6 +6,8 @@ import { allProducts } from "../components/ProductList/AllProducts";
 const products = allProducts
 
 
+
+
 function Products({navigation}) {
 
     const {width, height} = useWindowDimensions();

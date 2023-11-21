@@ -8,12 +8,24 @@ import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
 import { useSelector } from 'react-redux';
 import SearchModal from './components/Search/SearchModal';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Cart from './pages/Cart';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 function AppContent() {
 
     let searchOpen = useSelector(state => state.searchActions.searchActive);
+
+    function Home() { // back on this after buliding the cart page
+        return (
+          <Tab.Navigator>
+            <Tab.Screen name="ProductsPage" component={Products} />
+            <Tab.Screen name="ProductDetails" component={SearchModal} />
+          </Tab.Navigator>
+        );
+      }
 
     return(
         <>
@@ -22,8 +34,8 @@ function AppContent() {
                     <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen 
-                        name="Products"
-                        component={Products}
+                        name="Cart"
+                        component={Cart}
                         options={{ 
                             headerTitle: () => <HeaderNavigation />,
                             headerLeft: ()=> {return null},
@@ -44,7 +56,6 @@ function AppContent() {
                     </Stack.Navigator>
                     {searchOpen && <SearchModal /> }
                     <FooterNavigation />
-
                     </NavigationContainer>
                 </View>
             

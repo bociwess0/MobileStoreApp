@@ -1,5 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native';
 import FooterItem from '../components/Footer/FooterItem';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Products from '../pages/Products';
 const footerIcons = [
     {   
         id: 1,
@@ -23,9 +25,9 @@ const footerIcons = [
     },
 ]
 
+const Tab = createBottomTabNavigator();
 
 function FooterNavigation() {
-
     return(
         <View style={styles.footerWrapper}>
             {footerIcons.map((icon) => 
@@ -37,6 +39,9 @@ function FooterNavigation() {
                 />
                 )}
         </View>
+        // <Tab.Navigator>
+        //     <Tab.Screen name="Products" component={Products} />
+        // </Tab.Navigator>
     )
 }
 

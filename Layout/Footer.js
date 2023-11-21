@@ -2,6 +2,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import FooterItem from '../components/Footer/FooterItem';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Products from '../pages/Products';
+import Cart from '../pages/Cart';
 const footerIcons = [
     {   
         id: 1,
@@ -29,19 +30,20 @@ const Tab = createBottomTabNavigator();
 
 function FooterNavigation() {
     return(
-        <View style={styles.footerWrapper}>
-            {footerIcons.map((icon) => 
-                <FooterItem
-                    key = {icon.id}
-                    image = {icon.image}
-                    text = {icon.text}
-                    id = {icon.id}
-                />
-                )}
-        </View>
-        // <Tab.Navigator>
-        //     <Tab.Screen name="Products" component={Products} />
-        // </Tab.Navigator>
+        // <View style={styles.footerWrapper}>
+        //     {footerIcons.map((icon) => 
+        //         <FooterItem
+        //             key = {icon.id}
+        //             image = {icon.image}
+        //             text = {icon.text}
+        //             id = {icon.id}
+        //         />
+        //         )}
+        // </View>
+        <Tab.Navigator>
+            <Tab.Screen name="Products" component={Products} />
+            <Tab.Screen name="Cart" component={Cart} />
+        </Tab.Navigator>
     )
 }
 

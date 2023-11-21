@@ -19,10 +19,13 @@ function AppContent() {
     let searchOpen = useSelector(state => state.searchActions.searchActive);
 
     function Home() { // back on this after buliding the cart page
+      
         return (
-          <Tab.Navigator>
-            <Tab.Screen name="ProductsPage" component={Products} />
-            <Tab.Screen name="ProductDetails" component={SearchModal} />
+          <Tab.Navigator screenOptions={{
+            headerShown: false, // Set headerShown to false to hide the header
+          }}>
+            <Tab.Screen name="Products" component={Products} />
+            <Tab.Screen name="Cart" component={Cart} />
           </Tab.Navigator>
         );
       }
@@ -34,8 +37,8 @@ function AppContent() {
                     <NavigationContainer>
                     <Stack.Navigator>
                         <Stack.Screen 
-                        name="Cart"
-                        component={Cart}
+                        name="Products"
+                        component={Home}
                         options={{ 
                             headerTitle: () => <HeaderNavigation />,
                             headerLeft: ()=> {return null},
@@ -50,12 +53,24 @@ function AppContent() {
                             headerTitle: () => <HeaderNavigation />,
                             headerLeft: ()=> {return null},
                             headerStyle: {backgroundColor: "#0B003C"},
-                        }} 
+                        }}
+                         
+                        
+                        />
+                        <Stack.Screen 
+                        name="Cart"
+                        component={Home}
+                        options={{ 
+                            headerTitle: () => <HeaderNavigation />,
+                            headerLeft: ()=> {return null},
+                            headerStyle: {backgroundColor: "#0B003C"},
+                        }}
+                         
                         
                         />
                     </Stack.Navigator>
                     {searchOpen && <SearchModal /> }
-                    <FooterNavigation />
+                    {/* <FooterNavigation /> */}
                     </NavigationContainer>
                 </View>
             

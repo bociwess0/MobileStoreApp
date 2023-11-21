@@ -4,20 +4,16 @@ import CartItem from "../components/Cart/CartItem";
 import { useSelector } from "react-redux";
 
 
-const products = allProducts
-
-
 function Cart() {
 
     const {width, height} = useWindowDimensions();
     let productsInCart = useSelector(state => state.cartActions.cartItems);
-    
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
             {productsInCart.length > 0 && 
                 <FlatList 
-                    data={products}
+                    data={productsInCart}
                     renderItem={(product) => {
                             return(
                                 <CartItem

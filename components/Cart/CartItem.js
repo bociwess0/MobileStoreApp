@@ -1,7 +1,15 @@
 import { Image, Pressable, View, StyleSheet, Text } from "react-native";
+import { useDispatch } from "react-redux";
+import { removeFromCart } from "../../redux/cartSlice";
 
 
 function CartItem(props) {
+
+    const dispatch = useDispatch();
+
+    function removeFromCartHandler() {
+        dispatch(removeFromCart({id: props.item.item.id}));
+    }
 
     return(
         <View style={styles.productItemWrapper}>
@@ -18,7 +26,7 @@ function CartItem(props) {
                     <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.price}€`}</Text>
                     <Text style={{fontSize: 14, color:"#fff"}}>{`Quantity: 1`}</Text>
                 </View>
-                <Pressable style={styles.removeFromCartButton}>
+                <Pressable style={styles.removeFromCartButton} onPress={removeFromCartHandler}>
                         <Text style={{fontSize: 14, color: "#fff"}}>Remove From Cart</Text>
                 </Pressable>
             </View>

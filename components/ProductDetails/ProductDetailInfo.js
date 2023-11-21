@@ -1,6 +1,7 @@
 import { Image, StyleSheet, View, Text, Pressable, FlatList, ScrollView } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import Quantity from "./ChooseQuantity/Quantity";
+import AddToCartButton from "../ProductList/AddToCartButton";
 
 function ProductDetailInfo(props) {
 
@@ -32,9 +33,7 @@ function ProductDetailInfo(props) {
             </View>
             <View style={styles.priceAndButton}>
                     <Text style={{fontSize: 26, color:"#fff"}}>{`${selectedItem.price}€`}</Text>
-                    <Pressable style={styles.addToCartButton}>
-                        <Text style={{fontSize: 20, color: "#fff"}}>Add To Cart</Text>
-                    </Pressable>
+                    <AddToCartButton item={selectedItem} />
                 </View>
         </View>
     )

@@ -1,20 +1,13 @@
-import { useState } from "react";
 import { View, Text, Pressable, StyleSheet } from "react-native";
 
-function Quantity() {
+function Quantity(props) {
 
-    const [quantityNumber, setQuantityNumber] = useState(1);
-
-    function increaseQuantityHandler() {
-        if(quantityNumber < 10) {
-            setQuantityNumber(quantityNumber + 1);
-        }
+    function increase() {
+        props.onIncreaseQuantity();
     }
     
-    function reduceQuantityHandler() {
-        if(quantityNumber > 1) {
-            setQuantityNumber(quantityNumber - 1)
-        }
+    function reduce() {
+        props.onReduceQuantity();
     }
 
     return(
@@ -22,11 +15,11 @@ function Quantity() {
             <Text style={{fontSize: 16, color: "#fff", marginRight: 20}}>Quantity:</Text>
             <View style={styles.productSizeWrapper}>
             <Pressable style={styles.quantityNumber}>
-                <Text style={{fontSize: 16, color: "#fff"}} onPress={reduceQuantityHandler}>−</Text>
+                <Text style={{fontSize: 16, color: "#fff"}} onPress={reduce}>−</Text>
             </Pressable>
-            <Text style={{fontSize: 16, color: "#fff"}} >{quantityNumber.toString()}</Text>
+            <Text style={{fontSize: 16, color: "#fff"}} >{props.quantityNumber}</Text>
             <Pressable style={styles.quantityNumber}>
-                <Text style={{fontSize: 16, color: "#fff"}} onPress={increaseQuantityHandler}>+</Text>
+                <Text style={{fontSize: 16, color: "#fff"}} onPress={increase}>+</Text>
             </Pressable>
         </View>
         </View>

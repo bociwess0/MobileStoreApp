@@ -1,13 +1,21 @@
 import { View, StyleSheet, FlatList, useWindowDimensions, Text } from "react-native";
-import { allProducts } from "../components/ProductList/AllProducts";
 import CartItem from "../components/Cart/CartItem";
 import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useEffect } from "react";
 
 
 function Cart() {
 
     const {width, height} = useWindowDimensions();
-    let productsInCart = useSelector(state => state.cartActions.cartItems);
+
+    let updatedProducts = useSelector(state => state.cartActions.cartItems);
+    const [productsInCart, setProductsInCart] = useState([]);
+
+    useEffect(() => {
+        setProductsInCart(updatedProducts);
+    }, [updatedProducts])
+
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >

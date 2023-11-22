@@ -24,7 +24,7 @@ function CartItem(props) {
 
                 <View style={styles.priceAndQuantity}>
                     <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.price}€`}</Text>
-                    <Text style={{fontSize: 14, color:"#fff"}}>{`Quantity: 1`}</Text>
+                    <Text style={{fontSize: 14, color:"#fff"}}>{`Quantity: ${props.item.item.quantity}`}</Text>
                 </View>
                 <Pressable style={styles.removeFromCartButton} onPress={removeFromCartHandler}>
                         <Text style={{fontSize: 14, color: "#fff"}}>Remove From Cart</Text>

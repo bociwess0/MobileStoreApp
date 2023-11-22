@@ -6,6 +6,7 @@ export const allProducts = [
         title: "Iphone 15",
         brand: "Apple",
         price: 895,
+        quantity: 0,
         colors: ["red"],
         images: [
             require("../../assets/Products/iphone-15.jpg"),
@@ -21,6 +22,7 @@ export const allProducts = [
         title: "Galaxy S23",
         brand: "Samsung",
         price: 895,
+        quantity: 0,
         colors: ["black", "white"],
         images: [
             require("../../assets/Products/galaxy-s23.jpg"),
@@ -35,6 +37,7 @@ export const allProducts = [
         title: "Xiaomi 14 Pro",
         brand: "Xiaomi",
         price: 1000,
+        quantity: 0,
         colors: ["green"],
         images: [
             require("../../assets/Products/xiaomi-14-pro.jpg"),
@@ -49,6 +52,7 @@ export const allProducts = [
         title: "Mate 60 Pro",
         brand: "Huawei",
         price: 990,
+        quantity: 0,
         colors: ["gray"],
         images: [
             require("../../assets/Products/huawei-mate-60-pro.jpg"),

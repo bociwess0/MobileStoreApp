@@ -2,10 +2,25 @@ import { Image, StyleSheet, View, Text, Pressable, FlatList, ScrollView } from "
 import SelectDropdown from "react-native-select-dropdown";
 import Quantity from "./ChooseQuantity/Quantity";
 import AddToCartButton from "../ProductList/AddToCartButton";
+import { useState } from "react";
 
 function ProductDetailInfo(props) {
 
     const selectedItem = props.item;
+
+    const [quantityNumber, setQuantityNumber] = useState(1);
+
+    function increaseQuantityHandler() {
+        if(quantityNumber < 10) {
+            setQuantityNumber(quantityNumber + 1);
+        }
+    }
+    
+    function reduceQuantityHandler() {
+        if(quantityNumber > 1) {
+            setQuantityNumber(quantityNumber - 1)
+        }
+    }
 
     return(
         <View style={styles.detailInfoWrapper}>
@@ -29,11 +44,18 @@ function ProductDetailInfo(props) {
                 <Text numberOfLines={3} ellipsizeMode="tail" style={{color: "#afb0ae", fontSize:14, marginBottom: 10}}>
                     {selectedItem.description}
                 </Text>
-                <Quantity />
+                <Quantity 
+                    quantityNumber = {quantityNumber} 
+                    onIncreaseQuantity={increaseQuantityHandler} 
+                    onReduceQuantity={reduceQuantityHandler}
+                />
             </View>
             <View style={styles.priceAndButton}>
                     <Text style={{fontSize: 26, color:"#fff"}}>{`${selectedItem.price}€`}</Text>
-                    <AddToCartButton item={selectedItem} />
+                    <AddToCartButton 
+                        item={selectedItem}
+                        quantityNumber={quantityNumber}  
+                    />
                 </View>
         </View>
     )

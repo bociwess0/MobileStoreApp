@@ -7,7 +7,10 @@ function AddToCartButton(props) {
     const dispatch = useDispatch();
 
     function handleAddToCart() {
-        dispatch(addToCart({item: props.item}))
+        if(typeof props.quantityNumber !== "undefined") {
+            dispatch(addToCart({item: props.item, quantityNumber: props.quantityNumber}))
+        } else dispatch(addToCart({item: props.item, quantityNumber: 1}))
+        
     }
 
     return(

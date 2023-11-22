@@ -3,6 +3,7 @@ import CartItem from "../components/Cart/CartItem";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
+import CheckoutButton from "../components/Cart/CheckoutButton";
 
 
 function Cart() {
@@ -31,7 +32,7 @@ function Cart() {
                         }
                     }
                     keyExtractor={item => item.id}
-                    style={[styles.productsWrapper, {height: height - 150}]}
+                    style={[styles.productsWrapper, {height: height - 200}]}
                 />
             }
             {productsInCart.length === 0 &&
@@ -39,6 +40,7 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
+            <CheckoutButton productsInCart={productsInCart} />
       </View>
 
     )
@@ -50,7 +52,10 @@ const styles = StyleSheet.create({
         flexDirection: "column",
         gap: 20,
         padding: 10,
-        paddingBottom: 20,
+        paddingBottom: 40,
+        marginBottom: 20,
+        borderColor: "#D12E8F",
+        borderBottomColor: 1,
         width: "100%",
     },
 });

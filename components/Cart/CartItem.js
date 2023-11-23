@@ -1,14 +1,11 @@
 import { Image, Pressable, View, StyleSheet, Text } from "react-native";
-import { useDispatch } from "react-redux";
-import { removeFromCart } from "../../redux/cartSlice";
 
 
 function CartItem(props) {
 
-    const dispatch = useDispatch();
 
     function removeFromCartHandler() {
-        dispatch(removeFromCart({id: props.item.item.id}));
+        props.onRemoveProduct(props.item.item.id)
     }
 
     return(

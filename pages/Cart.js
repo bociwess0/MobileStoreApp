@@ -5,7 +5,8 @@ import { useState } from "react";
 import { useEffect } from "react";
 import CheckoutButton from "../components/Cart/CheckoutButton";
 import CartConfirm from "../components/Cart/CartConfirm";
-import { toggleCartConfirm } from "../redux/cartSlice";
+import { removeFromCart, toggleCartConfirm } from "../redux/cartSlice";
+import PopupModal from "../components/Modals/Popup";
 
 
 function Cart() {
@@ -15,12 +16,26 @@ function Cart() {
     let updatedProducts = useSelector(state => state.cartActions.cartItems);
     let cartConfirmActive = useSelector(state => state.cartActions.cartConfirmActive)
 
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    let modalMessage = "Are you sure you want to remove this product?";
+
+
     const [productsInCart, setProductsInCart] = useState([]);
+    const [targetItemId, setTargetItemId] = useState(0);
 
     const dispatch = useDispatch();
 
     function handleCartConfirm() {
         dispatch(toggleCartConfirm());
+    }
+
+    function handleModal(id) {
+        setIsModalVisible(!isModalVisible);
+        setTargetItemId(id);
+    }
+
+    function removeFromCartHandler() {
+        dispatch(removeFromCart({id: targetItemId}));
     }
 
     useEffect(() => {
@@ -38,6 +53,7 @@ function Cart() {
                                 <CartItem
                                     item = {product}
                                     showRemoveProductButton = {true}
+                                    onRemoveProduct={handleModal}
                                 />
                             )
                         }
@@ -53,7 +69,13 @@ function Cart() {
             }
             {!cartConfirmActive && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
             {cartConfirmActive && <CartConfirm productsInCart = {productsInCart}/>}
-            
+            <PopupModal 
+                isModalVisible={isModalVisible}
+                onCloseModal={handleModal}
+                products={productsInCart} 
+                message={modalMessage} 
+                modalAction={removeFromCartHandler}
+            />
       </View>
 
     )

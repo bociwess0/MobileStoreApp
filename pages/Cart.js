@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import CheckoutButton from "../components/Cart/CheckoutButton";
+import CartConfirm from "../components/Cart/CartConfirm";
 
 
 function Cart() {
@@ -12,6 +13,11 @@ function Cart() {
 
     let updatedProducts = useSelector(state => state.cartActions.cartItems);
     const [productsInCart, setProductsInCart] = useState([]);
+    const [showCartConfirm, setShowCartConfirm] = useState(false);
+
+    function handleCartConfirm() {
+        setShowCartConfirm(!showCartConfirm);
+    }
 
     useEffect(() => {
         setProductsInCart(updatedProducts);
@@ -20,7 +26,7 @@ function Cart() {
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
-            {productsInCart.length > 0 && 
+            {!showCartConfirm && productsInCart.length > 0 && 
                 <FlatList 
                     data={productsInCart}
                     renderItem={(product) => {
@@ -40,7 +46,8 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
-            {productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} /> }
+            {!showCartConfirm && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
+            {showCartConfirm && <CartConfirm />}
             
       </View>
 

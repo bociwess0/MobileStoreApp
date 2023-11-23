@@ -1,12 +1,18 @@
 import { Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import CartModal from "./CartModal";
 import { useState } from "react";
+import PopupModal from "../Modals/Popup";
 
 function CheckoutButton(props) {
 
     const {width} = useWindowDimensions();
 
     const [isModalVisible, setIsModalVisible] = useState(false);
+    let modalMessage = "Are you sure you want to submit your order?";
+
+    function handleConfirmPage() {
+        props.onShowCartConfirm();
+    }
 
     const handleModal = () => setIsModalVisible(() => !isModalVisible);
 
@@ -15,7 +21,13 @@ function CheckoutButton(props) {
             <Pressable style={ styles.buttonWrapper} onPress={handleModal}>
                 <Text style={{fontSize: 18, color: "#fff"}}>Submit order</Text>
             </Pressable>
-            <CartModal isModalVisible={isModalVisible} onCloseModal={handleModal} products={props.productsInCart} />
+            <PopupModal 
+                isModalVisible={isModalVisible}
+                onCloseModal={handleModal}
+                products={props.productsInCart} 
+                message={modalMessage} 
+                modalAction={handleConfirmPage}
+            />
         </View>
     )
 }

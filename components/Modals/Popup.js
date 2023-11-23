@@ -1,11 +1,16 @@
 import { Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { Modal } from "react-native";
 
-function CartModal(props) {
+function PopupModal(props) {
 
   const {width, height} = useWindowDimensions();
 
   function CloseModal() {
+    props.onCloseModal();
+  }
+
+  function handleModalAction(){
+    props.modalAction();
     props.onCloseModal();
   }
 
@@ -17,7 +22,7 @@ function CartModal(props) {
             <Text style={{fontSize: 16, color: "#1A1A1A", textAlign: "center"}}>{props.message}</Text>
           </View>
           <View style={styles.buttonsWrapper}>
-            <Pressable style={styles.confirmButton}>
+            <Pressable style={styles.confirmButton} onPress={handleModalAction}>
               <Text style={{color: "#fff"}}>Yes</Text>
             </Pressable>
             <Pressable style={styles.declineButton} onPress={CloseModal}>
@@ -83,4 +88,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default CartModal;
+export default PopupModal;

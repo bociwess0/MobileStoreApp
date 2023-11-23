@@ -40,7 +40,8 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
-            <CheckoutButton productsInCart={productsInCart} />
+            {productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} /> }
+            
       </View>
 
     )

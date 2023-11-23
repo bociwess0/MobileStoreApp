@@ -1,6 +1,9 @@
 import { View, StyleSheet, FlatList, useWindowDimensions } from "react-native";
 import ProductItem from "../components/ProductList/ProductItem";
 import { allProducts } from "../components/ProductList/AllProducts";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { toggleCartConfirm } from "../redux/cartSlice";
 
 
 const products = allProducts
@@ -11,6 +14,7 @@ const products = allProducts
 function Products({navigation}) {
 
     const {width, height} = useWindowDimensions();
+
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >

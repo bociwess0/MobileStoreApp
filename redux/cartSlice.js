@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        cartItems: []
+        cartItems: [],
+        cartConfirmActive: false
     },
     reducers: {
         addToCart: (state, action) => {
@@ -20,9 +21,18 @@ const cartSlice = createSlice({
                 }
                 state.cartItems.push(newProduct);
             }
-          },
+        },
+        
         removeFromCart: (state, action) => {
             state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.id);
+        },
+
+        clearCart: (state) => {
+            state.cartItems = [];
+        },
+
+        toggleCartConfirm: (state) => {
+            state.cartConfirmActive = !state.cartConfirmActive;
         }
     }
 })
@@ -30,5 +40,7 @@ const cartSlice = createSlice({
 const cartReducer = cartSlice.reducer;
 export const addToCart = cartSlice.actions.addToCart;
 export const removeFromCart = cartSlice.actions.removeFromCart;
+export const toggleCartConfirm = cartSlice.actions.toggleCartConfirm;
+export const clearCart = cartSlice.actions.clearCart;
 
 export default cartReducer;

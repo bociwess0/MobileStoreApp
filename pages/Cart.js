@@ -1,10 +1,11 @@
 import { View, StyleSheet, FlatList, useWindowDimensions, Text } from "react-native";
 import CartItem from "../components/Cart/CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { useEffect } from "react";
 import CheckoutButton from "../components/Cart/CheckoutButton";
 import CartConfirm from "../components/Cart/CartConfirm";
+import { toggleCartConfirm } from "../redux/cartSlice";
 
 
 function Cart() {
@@ -12,11 +13,14 @@ function Cart() {
     const {width, height} = useWindowDimensions();
 
     let updatedProducts = useSelector(state => state.cartActions.cartItems);
+    let cartConfirmActive = useSelector(state => state.cartActions.cartConfirmActive)
+
     const [productsInCart, setProductsInCart] = useState([]);
-    const [showCartConfirm, setShowCartConfirm] = useState(false);
+
+    const dispatch = useDispatch();
 
     function handleCartConfirm() {
-        setShowCartConfirm(!showCartConfirm);
+        dispatch(toggleCartConfirm());
     }
 
     useEffect(() => {
@@ -26,13 +30,14 @@ function Cart() {
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
-            {!showCartConfirm && productsInCart.length > 0 && 
+            {!cartConfirmActive && productsInCart.length > 0 && 
                 <FlatList 
                     data={productsInCart}
                     renderItem={(product) => {
                             return(
                                 <CartItem
                                     item = {product}
+                                    showRemoveProductButton = {true}
                                 />
                             )
                         }
@@ -46,8 +51,8 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
-            {!showCartConfirm && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
-            {showCartConfirm && <CartConfirm />}
+            {!cartConfirmActive && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
+            {cartConfirmActive && <CartConfirm productsInCart = {productsInCart}/>}
             
       </View>
 

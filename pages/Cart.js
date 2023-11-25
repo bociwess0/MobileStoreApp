@@ -7,6 +7,7 @@ import CheckoutButton from "../components/Cart/CheckoutButton";
 import CartConfirm from "../components/Cart/CartConfirm";
 import { removeFromCart, toggleCartConfirm } from "../redux/cartSlice";
 import PopupModal from "../components/Modals/Popup";
+import CartTotal from "../components/Cart/CartTotal";
 
 
 function Cart() {
@@ -21,7 +22,7 @@ function Cart() {
 
 
     const [productsInCart, setProductsInCart] = useState([]);
-    const [targetItemId, setTargetItemId] = useState(0);
+    const [targetItem, setTargetItem] = useState({});
 
     const dispatch = useDispatch();
 
@@ -29,13 +30,13 @@ function Cart() {
         dispatch(toggleCartConfirm());
     }
 
-    function handleModal(id) {
+    function handleModal(item) {
         setIsModalVisible(!isModalVisible);
-        setTargetItemId(id);
+        setTargetItem(item);
     }
 
     function removeFromCartHandler() {
-        dispatch(removeFromCart({id: targetItemId}));
+        dispatch(removeFromCart({item: targetItem}));
     }
 
     useEffect(() => {
@@ -59,7 +60,7 @@ function Cart() {
                         }
                     }
                     keyExtractor={item => item.id}
-                    style={[styles.productsWrapper, {height: height - 200}]}
+                    style={[styles.productsWrapper, {height: height - 250}]}
                 />
             }
             {productsInCart.length === 0 &&
@@ -67,6 +68,8 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
+            {!cartConfirmActive && productsInCart.length > 0 && <CartTotal />}
+            
             {!cartConfirmActive && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
             {cartConfirmActive && <CartConfirm productsInCart = {productsInCart}/>}
             <PopupModal 

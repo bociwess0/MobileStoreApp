@@ -37,7 +37,7 @@ function ProductImageSlider(props) {
                 
                 ref={slideRef}
             />
-            <Pagination slides={images} scrollX={scrollX} />
+            <Pagination key={Math.random()} slides={images} scrollX={scrollX} />
         </View>
     )
 }

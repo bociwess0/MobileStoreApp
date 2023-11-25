@@ -5,7 +5,7 @@ function CartItem(props) {
 
 
     function removeFromCartHandler() {
-        props.onRemoveProduct(props.item.item.id)
+        props.onRemoveProduct(props.item.item)
     }
 
     return(

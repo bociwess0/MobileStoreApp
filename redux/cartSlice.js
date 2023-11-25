@@ -4,7 +4,8 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         cartItems: [],
-        cartConfirmActive: false
+        cartConfirmActive: false,
+        cartTotal: 0
     },
     reducers: {
         addToCart: (state, action) => {
@@ -19,16 +20,21 @@ const cartSlice = createSlice({
                     ...addedProduct,
                     quantity: quantityNumber
                 }
-                state.cartItems.push(newProduct);
+                state.cartItems.push(newProduct); 
             }
+
+            state.cartTotal += addedProduct.price * quantityNumber;
+
         },
         
         removeFromCart: (state, action) => {
-            state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.id);
+            state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.item.id);
+            state.cartTotal -= action.payload.item.price * action.payload.item.quantity;
         },
 
         clearCart: (state) => {
             state.cartItems = [];
+            state.cartTotal = 0
         },
 
         toggleCartConfirm: (state) => {

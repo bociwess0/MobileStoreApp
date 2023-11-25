@@ -3,6 +3,7 @@ import CartItem from "./CartItem";
 import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { clearCart, toggleCartConfirm } from "../../redux/cartSlice";
+import CartTotal from "./CartTotal";
 
 function CartConfirm(props) {
     const {width, height} = useWindowDimensions();
@@ -18,7 +19,7 @@ function CartConfirm(props) {
     }
 
     return(
-        <View style={{height: height - 150, padding: 20}}>
+        <View style={{height: height - 140, padding: 20}}>
             <FlatList 
                     data={props.productsInCart}
                     renderItem={(product) => {
@@ -31,8 +32,10 @@ function CartConfirm(props) {
                         }
                     }
                     keyExtractor={item => item.id}
-                    style={[styles.productsWrapper, {height: height - 200}]}
+                    style={[styles.productsWrapper, {height: height - 190}]}
             />
+
+            <CartTotal />
 
             <Pressable style={styles.backButton} onPress={navigateToHome}>
                 <Text style={{fontSize: 16, color: "#fff"}}>Back To Home Page</Text>
@@ -50,6 +53,7 @@ const styles = StyleSheet.create({
         gap: 20,
         borderColor: "#D12E8F",
         borderBottomColor: 1,
+        marginBottom: 20,
         width: "100%",
     },
 

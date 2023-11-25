@@ -4,6 +4,7 @@ import { allProducts } from "../components/ProductList/AllProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toggleCartConfirm } from "../redux/cartSlice";
+import HeaderNavigation from "../Layout/Header";
 
 
 const products = allProducts
@@ -18,6 +19,7 @@ function Products({navigation}) {
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
+            <HeaderNavigation />
             <FlatList 
                 data={products}
                 renderItem={(product) => {

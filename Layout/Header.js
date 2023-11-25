@@ -4,6 +4,7 @@ import PageInfo from '../components/Header/PageInfo';
 
 
 function HeaderNavigation() {
+    
     return(
         <View style={styles.headerWrapper}>
             <PageInfo />
@@ -22,7 +23,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         paddingVertical: 10,
-        paddingRight: 30,
+        paddingHorizontal: 20,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

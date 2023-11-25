@@ -1,23 +1,13 @@
-import { StyleSheet, Text, Image, Pressable } from "react-native";
-import { useDispatch } from "react-redux";
-import { showSearch } from "../../redux/searchSlice";
+import { StyleSheet, Text, Image, View } from "react-native";
 
 
 function FooterItem(props) {
 
-    const dispatch = useDispatch();
-
-    function showSearchModalHandler(id) {
-        if(id === 2) {
-            dispatch(showSearch());
-        }
-    }
-
     return(
-        <Pressable style={styles.footerItemWrapper} onPress={() => showSearchModalHandler(props.id)}>
-            <Image source={props.image} />
-            <Text style={styles.text}>{props.text}</Text>
-        </Pressable>
+        <View style={styles.footerItemWrapper}>
+            <Image source={props.image} style={{tintColor: props.focused ? "#C93E4D" : "#fff"}} />
+            <Text style={[styles.text, {color: props.focused ? "#C93E4D" : "#fff"}]}>{props.text}</Text>
+        </View>
     )
 }
 
@@ -30,9 +20,7 @@ const styles = StyleSheet.create({
         position: "relative",
     },
     text: {
-        color: "#fff",
         fontSize: 12,
-        marginTop: 5
     }
 });
 

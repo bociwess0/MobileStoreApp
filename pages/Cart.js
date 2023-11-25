@@ -8,6 +8,7 @@ import CartConfirm from "../components/Cart/CartConfirm";
 import { removeFromCart, toggleCartConfirm } from "../redux/cartSlice";
 import PopupModal from "../components/Modals/Popup";
 import CartTotal from "../components/Cart/CartTotal";
+import HeaderNavigation from "../Layout/Header";
 
 
 function Cart() {
@@ -46,6 +47,7 @@ function Cart() {
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
+            <HeaderNavigation />
             {!cartConfirmActive && productsInCart.length > 0 && 
                 <FlatList 
                     data={productsInCart}

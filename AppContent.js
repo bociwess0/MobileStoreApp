@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 import FooterNavigation from './Layout/Footer';
 import HeaderNavigation from './Layout/Header';
 
@@ -16,28 +16,20 @@ const Tab = createBottomTabNavigator();
 
 function AppContent() {
 
-    function Home() { // back on this after buliding the cart page
-      
-        return (
-          <Tab.Navigator screenOptions={{
-            headerShown: false, // Set headerShown to false to hide the header
-          }}>
-            <Tab.Screen name="Products" component={Products} />
-            <Tab.Screen name="Search" component={SearchModal} />
-            <Tab.Screen name="Cart" component={Cart} />
-          </Tab.Navigator>
-        );
-      }
-
     return(
         <>
             
             <View style={styles.mainContentWrapper}>
-                    <NavigationContainer>
-                    <Stack.Navigator>
+                    <NavigationContainer >
+                    <Stack.Navigator  screenOptions={{
+                        headerShown: false,
+                        tabBarShowLabel: false,
+                        animation: "slide_from_right"
+                      }}
+                    >
                         <Stack.Screen 
                         name="Products"
-                        component={Home}
+                        component={FooterNavigation}
                         options={{ 
                             headerTitle: () => <HeaderNavigation />,
                             headerLeft: ()=> {return null},
@@ -48,17 +40,6 @@ function AppContent() {
                         <Stack.Screen 
                         name="ProductDetails"
                         component={ProductDetails}
-                        options={{ 
-                            headerTitle: () => <HeaderNavigation />,
-                            headerLeft: ()=> {return null},
-                            headerStyle: {backgroundColor: "#0B003C"},
-                        }}
-                         
-                        
-                        />
-                        <Stack.Screen 
-                        name="Cart"
-                        component={Home}
                         options={{ 
                             headerTitle: () => <HeaderNavigation />,
                             headerLeft: ()=> {return null},

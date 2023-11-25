@@ -14,6 +14,7 @@ function FooterNavigation() {
         <Tab.Navigator screenOptions={{
           headerShown: false, 
           tabBarStyle: {backgroundColor: "#0B003C", height: 100},
+          tabBarHideOnKeyboard: true
         }}>
           <Tab.Screen name="Products" component={Products} options={{
             tabBarIcon: ({ focused }) => (

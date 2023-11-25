@@ -16,8 +16,6 @@ const Tab = createBottomTabNavigator();
 
 function AppContent() {
 
-    let searchOpen = useSelector(state => state.searchActions.searchActive);
-
     function Home() { // back on this after buliding the cart page
       
         return (
@@ -25,6 +23,7 @@ function AppContent() {
             headerShown: false, // Set headerShown to false to hide the header
           }}>
             <Tab.Screen name="Products" component={Products} />
+            <Tab.Screen name="Search" component={SearchModal} />
             <Tab.Screen name="Cart" component={Cart} />
           </Tab.Navigator>
         );
@@ -69,8 +68,6 @@ function AppContent() {
                         
                         />
                     </Stack.Navigator>
-                    {searchOpen && <SearchModal /> }
-                    {/* <FooterNavigation /> */}
                     </NavigationContainer>
                 </View>
             

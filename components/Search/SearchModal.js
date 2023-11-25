@@ -1,5 +1,5 @@
 import { Modal, Pressable, StyleSheet, TextInput, View, Text } from "react-native"
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { hideSearch } from "../../redux/searchSlice";
 import SearchResults from "./SearchResults";
 import { useReducer, useState } from "react";
@@ -8,6 +8,7 @@ import { allProducts } from "../ProductList/AllProducts";
 function SearchModal() {
 
     const dispatch = useDispatch();
+    let searchVisible = useSelector(state => state.searchActions.searchActive);
 
     function closeSearchHandler() {
         dispatch(hideSearch());
@@ -31,17 +32,12 @@ function SearchModal() {
     const [state, searchDispatch] = useReducer(searchReducer, [])
 
     return(
-        <Modal animationType="slide">
-            <View style={styles.searchContainer} >
+        <View style={styles.searchContainer} >
                 <View style={styles.inputAndCloseWrapper}>
                     <TextInput style={{color: "#ffffff"}} placeholder="Search product..." placeholderTextColor="#e2e2e2" onChangeText={searchInputHandler}/>
-                    <Pressable style={styles.closeButton}>
-                        <Text style={{fontSize: 30, color: "#fff"}} onPress={closeSearchHandler}>×</Text>
-                    </Pressable>
                 </View>
                 <SearchResults products = {state} />
-            </View>
-        </Modal>
+        </View>
     )
 }
 

@@ -64,7 +64,7 @@ function Cart() {
                 />
             }
             {productsInCart.length === 0 &&
-                <View style={{height: height - 150, padding: 20}}>
+                <View style={{height: height - 140, padding: 20}}>
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const searchSlice = createSlice({
     name: 'search',
     initialState: {
-        searchActive: false,
+        searchActive: true,
         searchProductId: 1
     },
     reducers: {

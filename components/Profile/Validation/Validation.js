@@ -18,7 +18,7 @@ export const Validate = (fields) => {
             }
         }
 
-        else if(field.type === "password") {
+        else if(field.type === "password" || field.type === "newPassword" || field.type === "retypedPassword") {
             const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
             if (!passwordRegex.test(field.text)) {
                 message = 'Password must contain at least one letter, one number, and be at least 6 characters long';

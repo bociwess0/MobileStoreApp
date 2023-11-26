@@ -3,13 +3,16 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import ValidationPopup from "../Modals/ValidationPopup";
 import { ValidateFields, ValidateUser } from "./Validation/Validation";
-import { allUsers } from "./Users";
+import { useDispatch, useSelector } from "react-redux";
+import { logIn } from "../../redux/profileSlice";
 
 function LoginForm() {
 
 
     //variables
     const navigation = useNavigation();
+    const dispatch = useDispatch(); 
+    const reigsteredUsers = useSelector(state => state.profileActions.users);
 
     const [fieldsArray, setFieldsArray] = useState([]);
 
@@ -51,11 +54,12 @@ function LoginForm() {
             setModalVisible(true);
             setErrorMessage(message);
         } else {
-            if(ValidateUser(email, allUsers)) {
+            if(ValidateUser(email, reigsteredUsers)) {
                 message = "Login successful!";
                 setErrorMessage(message);
                 setModalVisible(true);
                 setFieldsArray([]);
+                dispatch(logIn());
             } else {
                 setModalVisible(true);
                 setErrorMessage("User not exists.");

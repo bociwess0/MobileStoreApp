@@ -3,11 +3,13 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
-import { allUsers } from "./Users";
+import { registerUser } from "../../redux/profileSlice";
+import { useDispatch } from "react-redux";
 
 function RegisterForm() {
 
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     function goToLogin() {
         navigation.navigate("Login");
@@ -62,10 +64,10 @@ function RegisterForm() {
             setGoToLoginPage(false)
         } else {
             message = "Registration successful! You can now login."
+            dispatch(registerUser({user: user}));
             setErrorMessage(message);
             setGoToLoginPage(true)
             setModalVisible(true);
-            allUsers.push(user);
             setFieldsArray([]);
         }
 

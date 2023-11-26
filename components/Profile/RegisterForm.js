@@ -66,7 +66,6 @@ function RegisterForm() {
             setGoToLoginPage(true)
             setModalVisible(true);
             allUsers.push(user);
-            console.log(allUsers);
             setFieldsArray([]);
         }
 

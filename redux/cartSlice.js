@@ -5,7 +5,8 @@ const cartSlice = createSlice({
     initialState: {
         cartItems: [],
         cartConfirmActive: false,
-        cartTotal: 0
+        cartTotal: 0,
+        cartTotalQuantity: 0
     },
     reducers: {
         addToCart: (state, action) => {
@@ -24,12 +25,14 @@ const cartSlice = createSlice({
             }
 
             state.cartTotal += addedProduct.price * quantityNumber;
+            state.cartTotalQuantity += quantityNumber;
 
         },
         
         removeFromCart: (state, action) => {
             state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.item.id);
             state.cartTotal -= action.payload.item.price * action.payload.item.quantity;
+            state.cartTotalQuantity -= action.payload.item.quantity;
         },
 
         clearCart: (state) => {

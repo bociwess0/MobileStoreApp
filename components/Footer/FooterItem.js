@@ -1,4 +1,5 @@
 import { StyleSheet, Text, Image, View } from "react-native";
+import CartFooterNumber from "../Cart/CartFooterNumber";
 
 
 function FooterItem(props) {
@@ -6,6 +7,7 @@ function FooterItem(props) {
     return(
         <View style={styles.footerItemWrapper}>
             <Image source={props.image} style={{tintColor: props.focused ? "#C93E4D" : "#fff"}} />
+            {props.text === "Cart" && <CartFooterNumber />}
             <Text style={[styles.text, {color: props.focused ? "#C93E4D" : "#fff"}]}>{props.text}</Text>
         </View>
     )

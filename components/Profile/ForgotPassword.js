@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 
-function RegisterForm() {
+function ForgotPassword() {
 
     const navigation = useNavigation();
 
@@ -10,19 +10,11 @@ function RegisterForm() {
     }
 
     return (
-        <View style={styles.registerForm}>
-            <Text style={{fontSize: 24, color: "#B4236C", textAlign: "center", fontWeight: 500}} >Registration</Text>
+        <View style={styles.forgotenPasswordForm}>
+            <Text style={{fontSize: 24, color: "#B4236C", textAlign: "center", fontWeight: 500}} >Forgotten Password</Text>
             <View style={{display: "flex", flexDirection: "column", justifyContent: "center",alignItems: "center", gap: 15}}>
-                <TextInput style={styles.inputContainer} placeholder="Name" placeholderTextColor="#fff" />
-                <TextInput style={styles.inputContainer} placeholder="Surname" placeholderTextColor="#fff"/>
-                <TextInput style={styles.inputContainer} placeholder="Email" placeholderTextColor="#fff" />
-                <TextInput style={styles.inputContainer} placeholder="Password" placeholderTextColor="#fff"  secureTextEntry={true} />
-                <TextInput style={styles.inputContainer} placeholder="Address" placeholderTextColor="#fff" />
-                <TextInput style={styles.inputContainer} placeholder="City" placeholderTextColor="#fff" />
-
-                <Pressable style={styles.loginButton}>
-                    <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>SIGN UP</Text>
-                </Pressable>
+                <TextInput style={styles.inputContainer} placeholder="New Password" placeholderTextColor="#fff"  secureTextEntry={true} />
+                <TextInput style={styles.inputContainer} placeholder="Retype Password" placeholderTextColor="#fff"  secureTextEntry={true} />
                 <Pressable onPress={goToLogin}>
                     <Text style={{fontSize: 16, color: "#B4236C", textAlign: "center"}} >Log In</Text>
                 </Pressable>
@@ -32,7 +24,7 @@ function RegisterForm() {
 }
 
 const styles = StyleSheet.create({
-    registerForm: {
+    forgotenPasswordForm: {
         display: "flex",
         flexDirection: "column",
         gap: 20,
@@ -63,4 +55,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default RegisterForm;
+export default ForgotPassword;

@@ -30,22 +30,10 @@ function AppContent() {
                         <Stack.Screen 
                         name="Products"
                         component={FooterNavigation}
-                        options={{ 
-                            headerTitle: () => <HeaderNavigation />,
-                            headerLeft: ()=> {return null},
-                            headerStyle: {backgroundColor: "#0B003C"},
-                        }} 
-
                         />
                         <Stack.Screen 
                         name="ProductDetails"
                         component={ProductDetails}
-                        options={{ 
-                            headerTitle: () => <HeaderNavigation />,
-                            headerLeft: ()=> {return null},
-                            headerStyle: {backgroundColor: "#0B003C"},
-                        }}
-                         
                         
                         />
                     </Stack.Navigator>
@@ -60,7 +48,8 @@ const styles = StyleSheet.create({
     mainContentWrapper: {
       flex: 1,
       width: "100%",
-      height: "100%"
+      height: "100%",
+      backgroundColor: "#100156"
     },
     headerStyle: {
       padding: 0,

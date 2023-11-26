@@ -1,8 +1,9 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { Validate } from "./Validation/Validation";
+import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
+import { allUsers } from "./Users";
 
 function RegisterForm() {
 
@@ -44,7 +45,16 @@ function RegisterForm() {
         fieldPushHandler('address', address)
         fieldPushHandler('city', city);
 
-        let message = Validate(fieldsArray);
+        let user = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            password: password,
+            address: address,
+            city: city
+        }
+
+        let message = ValidateFields(fieldsArray);
 
         if(message !== "OK") {
             setModalVisible(true);
@@ -55,6 +65,8 @@ function RegisterForm() {
             setErrorMessage(message);
             setGoToLoginPage(true)
             setModalVisible(true);
+            allUsers.push(user);
+            console.log(allUsers);
             setFieldsArray([]);
         }
 

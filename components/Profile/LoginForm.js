@@ -2,7 +2,8 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import ValidationPopup from "../Modals/ValidationPopup";
-import { Validate } from "./Validation/Validation";
+import { ValidateFields, ValidateUser } from "./Validation/Validation";
+import { allUsers } from "./Users";
 
 function LoginForm() {
 
@@ -44,16 +45,21 @@ function LoginForm() {
         fieldPushHandler('email', email)
         fieldPushHandler('password', password)
 
-        let message = Validate(fieldsArray);
+        let message = ValidateFields(fieldsArray);
 
         if(message !== "OK") {
             setModalVisible(true);
             setErrorMessage(message);
         } else {
-            message = "Login successful!";
-            setErrorMessage(message);
-            setModalVisible(true);
-            setFieldsArray([]);
+            if(ValidateUser(email, allUsers)) {
+                message = "Login successful!";
+                setErrorMessage(message);
+                setModalVisible(true);
+                setFieldsArray([]);
+            } else {
+                setModalVisible(true);
+                setErrorMessage("User not exists.");
+            }
         }
         setFieldsArray([]);
     }

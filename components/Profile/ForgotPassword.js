@@ -1,7 +1,7 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
-import { Validate } from "./Validation/Validation";
+import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
 
 function ForgotPassword() {
@@ -41,7 +41,7 @@ function ForgotPassword() {
         fieldPushHandler('newPassword', newPassword)
         fieldPushHandler('retypedPassword', retypedPassword)
 
-        let message = Validate(fieldsArray);
+        let message = ValidateFields(fieldsArray);
 
         if(message !== "OK") {
             setModalVisible(true);

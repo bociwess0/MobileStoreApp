@@ -1,5 +1,5 @@
 
-export const Validate = (fields) => {
+export const ValidateFields = (fields) => {
 
     let message = '';
 
@@ -37,4 +37,12 @@ export const Validate = (fields) => {
 
     message = "OK";
     return message;
+}
+
+export const ValidateUser = (email, listOfUsers) => {
+
+    const userExists = listOfUsers.find((user) => user.email === email);
+
+    return (typeof userExists !== "undefined") ? true : false;
+
 }

@@ -5,6 +5,7 @@ import RegisterForm from "../components/Profile/RegisterForm";
 import { createStackNavigator } from "@react-navigation/stack";
 import ForgotPassword from "../components/Profile/ForgotPassword";
 import { useSelector } from "react-redux";
+import Dashboard from "../components/Profile/User/Dashboard";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ function Profile() {
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20, height: height, width: width}}>
             <HeaderNavigation />
+            { userLoggedIn && <Dashboard />}
             { !userLoggedIn && 
                 <Stack.Navigator 
                     screenOptions={{

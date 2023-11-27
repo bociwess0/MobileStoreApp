@@ -8,6 +8,10 @@ export const allProducts = [
         price: 895,
         quantity: 0,
         colors: ["red"],
+        stores: ["Galerija SC, Beo SC"],
+        comments: [],
+        raiting: [],
+        avgRaiting: 0,
         images: [
             require("../../assets/Products/iphone-15.jpg"),
             require("../../assets/Products/iphone-15-2.jpg"),
@@ -24,6 +28,10 @@ export const allProducts = [
         price: 895,
         quantity: 0,
         colors: ["black", "white"],
+        stores: ["SC Usce, Beo SC"],
+        comments: [],
+        raiting: [],
+        avgRaiting: 0,
         images: [
             require("../../assets/Products/galaxy-s23.jpg"),
             require("../../assets/Products/galaxy-s23-2.png"),
@@ -39,6 +47,10 @@ export const allProducts = [
         price: 1000,
         quantity: 0,
         colors: ["green"],
+        stores: ["BIG, Beo SC"],
+        comments: [],
+        raiting: [],
+        avgRaiting: 0,
         images: [
             require("../../assets/Products/xiaomi-14-pro.jpg"),
             require("../../assets/Products/xiaomi-14-pro-2.jpg"),
@@ -54,6 +66,10 @@ export const allProducts = [
         price: 990,
         quantity: 0,
         colors: ["gray"],
+        stores: ["Delta City"],
+        comments: [],
+        raiting: [],
+        avgRaiting: 0,
         images: [
             require("../../assets/Products/huawei-mate-60-pro.jpg"),
             require("../../assets/Products/huawei-mate-60-pro-2.png"),

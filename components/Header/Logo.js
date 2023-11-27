@@ -1,11 +1,19 @@
-import { Image, Pressable, StyleSheet } from "react-native";
+import { Image, Pressable, StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
+import LogoutButton from "./LogoutButton";
 
 
 function Logo() {
+
+    const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
+
     return(
-        <Pressable style={styles.logoWrapper}>
-            <Image style={styles.image} source={require("../../assets/logo.png")} />
-        </Pressable>
+        <View style={{display: "flex", flexDirection: "row", gap: 20, alignItems: "center"}}>
+            {userLoggedIn && <LogoutButton />}
+            <Pressable style={styles.logoWrapper}>
+                <Image style={styles.image} source={require("../../assets/logo.png")} />
+            </Pressable>
+        </View>
     )
 }
 

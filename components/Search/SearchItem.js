@@ -38,9 +38,7 @@ function SearchItem(props) {
                 />
                 <View style={styles.priceAndButton}>
                     <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.price}€`}</Text>
-                    <Pressable style={styles.addToCartButton}>
-                        <Text style={{fontSize: 14, color: "#fff"}}>Add To Cart</Text>
-                    </Pressable>
+                
                 </View>
             </View>
         </View>
@@ -104,7 +102,8 @@ const styles = StyleSheet.create({
     brandAndViewMore: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        width: 160
     },
     
     brand: {

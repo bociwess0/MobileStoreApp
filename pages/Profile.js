@@ -6,6 +6,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import ForgotPassword from "../components/Profile/ForgotPassword";
 import { useSelector } from "react-redux";
 import Dashboard from "../components/Profile/User/Dashboard";
+import ProfileContent from "../components/Profile/ProfileContent";
 
 const Stack = createStackNavigator();
 
@@ -18,7 +19,7 @@ function Profile() {
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20, height: height, width: width}}>
             <HeaderNavigation />
-            { userLoggedIn && <Dashboard />}
+            { userLoggedIn && <ProfileContent />}
             { !userLoggedIn && 
                 <Stack.Navigator 
                     screenOptions={{

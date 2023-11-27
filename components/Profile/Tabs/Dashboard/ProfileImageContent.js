@@ -1,10 +1,10 @@
 import { Image, StyleSheet, Text, View } from "react-native";
 
-function ProfileImageContent() {
+function ProfileImageContent(props) {
     return (
         <View style={styles.imageContent}>
             <Image style={styles.image} source={require("../../../../assets/Profile/user.png")} />
-            <Text style={{fontSize: 16, color: "#fff"}}>Nikola Tosic</Text>
+            <Text style={{fontSize: 16, color: "#fff"}}>{`${props.firstName} ${props.lastName}`}</Text>
         </View>
     )
 }

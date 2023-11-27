@@ -16,7 +16,7 @@ function FooterNavigation() {
           tabBarStyle: {backgroundColor: "#0B003C", height: 100},
           tabBarHideOnKeyboard: true
         }}>
-          <Tab.Screen name="Products" component={Products} options={{
+          <Tab.Screen name="ProductsPage" component={Products} options={{
             tabBarIcon: ({ focused }) => (
               <FooterItem image={require("../assets/home.png")} focused={focused} text={"Products"} />
             ),

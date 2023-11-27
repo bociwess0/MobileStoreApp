@@ -4,7 +4,7 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import ValidationPopup from "../Modals/ValidationPopup";
 import { ValidateFields, ValidateUser } from "./Validation/Validation";
 import { useDispatch, useSelector } from "react-redux";
-import { logIn } from "../../redux/profileSlice";
+import { logIn, loginUser } from "../../redux/profileSlice";
 
 function LoginForm() {
 
@@ -60,6 +60,12 @@ function LoginForm() {
                 setModalVisible(true);
                 setFieldsArray([]);
                 dispatch(logIn());
+                dispatch(loginUser({
+                    user: {
+                        email: email,
+                        password: password
+                    }
+                }))
             } else {
                 setModalVisible(true);
                 setErrorMessage("User not exists.");

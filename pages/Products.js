@@ -1,18 +1,15 @@
 import { View, StyleSheet, FlatList, useWindowDimensions } from "react-native";
 import ProductItem from "../components/ProductList/ProductItem";
-import { allProducts } from "../components/ProductList/AllProducts";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { toggleCartConfirm } from "../redux/cartSlice";
 import HeaderNavigation from "../Layout/Header";
 
 
-const products = allProducts
-
-
-
 
 function Products({navigation}) {
+
+    const products = useSelector(state => state.productsActions.products)
 
     const {width, height} = useWindowDimensions();
 

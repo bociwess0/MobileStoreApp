@@ -7,7 +7,8 @@ const profileSlice = createSlice({
     initialState: {
         users: allUsers,
         userLoggedIn: false,
-        loggedUser: {}
+        loggedUser: {},
+        favoriteProducts: []
     },
     reducers: {
         logIn: (state) => {
@@ -23,6 +24,12 @@ const profileSlice = createSlice({
         },
         loginUser: (state, action) => {
             state.loggedUser = state.users.find((user) => user.email === action.payload.user.email);
+        },
+        addToFavorites: (state, action) => {
+            state.favoriteProducts.push(action.payload.product)
+        },
+        removeFromFavorites: (state, action) => {
+            state.favoriteProducts = state.favoriteProducts.filter((item) => item.id !== action.payload.id);
         }
     }
 })
@@ -33,5 +40,7 @@ export const logIn = profileSlice.actions.logIn;
 export const logOut = profileSlice.actions.logOut;
 export const registerUser = profileSlice.actions.registerUser;
 export const loginUser = profileSlice.actions.loginUser;
+export const addToFavorites = profileSlice.actions.addToFavorites;
+export const removeFromFavorites = profileSlice.actions.removeFromFavorites;
 
 export default profileReducer;

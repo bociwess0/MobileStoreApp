@@ -3,10 +3,13 @@ import SelectDropdown from "react-native-select-dropdown";
 import Quantity from "./ChooseQuantity/Quantity";
 import AddToCartButton from "../ProductList/AddToCartButton";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import FavoritesButton from "./LoggedUsersOnly/FavoritesButton";
 
 function ProductDetailInfo(props) {
 
     const selectedItem = props.item;
+    const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
 
     const [quantityNumber, setQuantityNumber] = useState(1);
 
@@ -26,9 +29,7 @@ function ProductDetailInfo(props) {
         <View style={styles.detailInfoWrapper}>
             <View style={styles.titleAndFavorites}>
                 <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>{selectedItem.title}</Text>
-                <Pressable>
-                    <Image style={{width: 30, height: 30}} source={require("../../assets/Products/favorites_icon.png")} />
-                </Pressable>
+                {userLoggedIn && <FavoritesButton product={selectedItem} />}
             </View>
             <View style={styles.brandAndColor}>
                 <Text style={{fontSize: 16, color: "#fff", marginTop: 10}}>{selectedItem.brand}</Text>

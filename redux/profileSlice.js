@@ -30,6 +30,23 @@ const profileSlice = createSlice({
         },
         removeFromFavorites: (state, action) => {
             state.favoriteProducts = state.favoriteProducts.filter((item) => item.id !== action.payload.item.id);
+        },
+        updateUser: (state, action) => {
+            state.loggedUser.firstName = action.payload.user.firstName;
+            state.loggedUser.lastName = action.payload.user.lastName;
+            state.loggedUser.email = action.payload.user.email;
+            state.loggedUser.password = action.payload.user.password;
+            state.loggedUser.address = action.payload.user.address;
+            state.loggedUser.city = action.payload.user.city;
+
+            const newUser = state.loggedUser;
+
+            const foundedUserIndex = state.users.findIndex((user) => user.email === newUser.email);
+
+            if(foundedUserIndex !== -1) {
+                state.users[foundedUserIndex] = newUser;
+            }
+
         }
     }
 })
@@ -40,6 +57,7 @@ export const logIn = profileSlice.actions.logIn;
 export const logOut = profileSlice.actions.logOut;
 export const registerUser = profileSlice.actions.registerUser;
 export const loginUser = profileSlice.actions.loginUser;
+export const updateUser = profileSlice.actions.updateUser;
 export const addToFavorites = profileSlice.actions.addToFavorites;
 export const removeFromFavorites = profileSlice.actions.removeFromFavorites;
 

@@ -7,8 +7,6 @@ import { useEffect } from "react";
 function FavoritesButton(props) {
 
     const dispatch = useDispatch();
-    // const [iconSrc, setIconSrc] = useState(require("../../../assets/Products/favorites_icon.png"));
-    // require("../../../assets/Products/favorites-active.png"))
 
     const favoriteProducts = useSelector(state => state.profileActions.favoriteProducts);
 
@@ -18,7 +16,7 @@ function FavoritesButton(props) {
         if (!foundObject) {
             dispatch(addToFavorites({product: props.product}));
         } else {
-            dispatch(removeFromFavorites({id: props.product.id}));
+            dispatch(removeFromFavorites({item: props.product}));
         }
     }
 

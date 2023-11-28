@@ -29,7 +29,7 @@ const profileSlice = createSlice({
             state.favoriteProducts.push(action.payload.product)
         },
         removeFromFavorites: (state, action) => {
-            state.favoriteProducts = state.favoriteProducts.filter((item) => item.id !== action.payload.id);
+            state.favoriteProducts = state.favoriteProducts.filter((item) => item.id !== action.payload.item.id);
         }
     }
 })

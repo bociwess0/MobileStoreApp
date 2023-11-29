@@ -4,6 +4,8 @@ import { Modal } from "react-native";
 function PopupModal(props) {
 
   const {width, height} = useWindowDimensions();
+  
+  let closeText = props.disableConfirm ? "Close" : "No";
 
   function CloseModal() {
     props.onCloseModal();
@@ -22,11 +24,11 @@ function PopupModal(props) {
             <Text style={{fontSize: 16, color: "#1A1A1A", textAlign: "center"}}>{props.message}</Text>
           </View>
           <View style={styles.buttonsWrapper}>
-            <Pressable style={styles.confirmButton} onPress={handleModalAction}>
-              <Text style={{color: "#fff"}}>Yes</Text>
-            </Pressable>
+            {!props.disableConfirm && <Pressable style={styles.confirmButton} onPress={handleModalAction}>
+                                      <Text style={{color: "#fff"}}>Yes</Text>
+                                    </Pressable>}
             <Pressable style={styles.declineButton} onPress={CloseModal}>
-              <Text style={{color: "#fff"}} >No</Text>
+              <Text style={{color: "#fff"}} >{closeText}</Text>
             </Pressable>
           </View>
         </View>

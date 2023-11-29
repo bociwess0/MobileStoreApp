@@ -42,6 +42,11 @@ const cartSlice = createSlice({
 
         toggleCartConfirm: (state) => {
             state.cartConfirmActive = !state.cartConfirmActive;
+            state.cartTotalQuantity = 0;
+        },
+
+        calculateCoupon: (state) => {
+            state.cartTotal = state.cartTotal * 0.8;
         }
     }
 })
@@ -51,5 +56,6 @@ export const addToCart = cartSlice.actions.addToCart;
 export const removeFromCart = cartSlice.actions.removeFromCart;
 export const toggleCartConfirm = cartSlice.actions.toggleCartConfirm;
 export const clearCart = cartSlice.actions.clearCart;
+export const calculateCoupon = cartSlice.actions.calculateCoupon;
 
 export default cartReducer;

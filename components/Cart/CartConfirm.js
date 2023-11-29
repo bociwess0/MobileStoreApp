@@ -15,6 +15,7 @@ function CartConfirm(props) {
     function navigateToHome() {
         dispatch(clearCart())
         dispatch(toggleCartConfirm());
+        props.setCoupon('');
         navigation.navigate("Products");
     }
 

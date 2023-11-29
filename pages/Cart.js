@@ -9,6 +9,7 @@ import { removeFromCart, toggleCartConfirm } from "../redux/cartSlice";
 import PopupModal from "../components/Modals/Popup";
 import CartTotal from "../components/Cart/CartTotal";
 import HeaderNavigation from "../Layout/Header";
+import CouponItem from "../components/Coupons/CouponItem";
 
 
 function Cart() {
@@ -17,6 +18,8 @@ function Cart() {
 
     let updatedProducts = useSelector(state => state.cartActions.cartItems);
     let cartConfirmActive = useSelector(state => state.cartActions.cartConfirmActive)
+    const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
+
 
     const [isModalVisible, setIsModalVisible] = useState(false);
     let modalMessage = "Are you sure you want to remove this product?";
@@ -24,6 +27,7 @@ function Cart() {
 
     const [productsInCart, setProductsInCart] = useState([]);
     const [targetItem, setTargetItem] = useState({});
+    const [enteredCoupon, setEnteredCoupon] = useState('');
 
     const dispatch = useDispatch();
 
@@ -39,6 +43,7 @@ function Cart() {
     function removeFromCartHandler() {
         dispatch(removeFromCart({item: targetItem}));
     }
+
 
     useEffect(() => {
         setProductsInCart(updatedProducts);
@@ -62,7 +67,7 @@ function Cart() {
                         }
                     }
                     keyExtractor={item => item.id}
-                    style={[styles.productsWrapper, {height: height - 250}]}
+                    style={[styles.productsWrapper, {height: userLoggedIn ? height - 320 : height - 260}]}
                 />
             }
             {productsInCart.length === 0 &&
@@ -70,10 +75,17 @@ function Cart() {
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }
+            {userLoggedIn && productsInCart.length > 0 && !cartConfirmActive && <CouponItem setCoupon={setEnteredCoupon} />}
+
             {!cartConfirmActive && productsInCart.length > 0 && <CartTotal />}
             
-            {!cartConfirmActive && productsInCart.length > 0 && <CheckoutButton productsInCart={productsInCart} onShowCartConfirm={handleCartConfirm} /> }
-            {cartConfirmActive && <CartConfirm productsInCart = {productsInCart}/>}
+            {!cartConfirmActive && productsInCart.length > 0 && <CheckoutButton 
+                                                                    productsInCart={productsInCart} 
+                                                                    onShowCartConfirm={handleCartConfirm} 
+                                                                    enteredCoupon = {enteredCoupon}
+                                                                    setCoupon={setEnteredCoupon}
+                                                                /> }
+            {cartConfirmActive && <CartConfirm productsInCart = {productsInCart} setCoupon={setEnteredCoupon} />}
             <PopupModal 
                 isModalVisible={isModalVisible}
                 onCloseModal={handleModal}

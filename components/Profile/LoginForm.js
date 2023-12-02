@@ -14,6 +14,8 @@ function LoginForm() {
     const dispatch = useDispatch(); 
     const reigsteredUsers = useSelector(state => state.profileActions.users);
 
+    console.log(reigsteredUsers);
+
     const [fieldsArray, setFieldsArray] = useState([]);
 
     const [email, setEmail] = useState('');

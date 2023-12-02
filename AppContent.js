@@ -4,10 +4,11 @@ import FooterNavigation from './Layout/Footer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './pages/ProductDetails';
-import { fetchProducts, storeProduct } from './components/HttpRequests/httpRequests';
-import { useEffect, useState } from 'react';
+import { fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { importDB_ID, importProcuctsFromDatabase } from './redux/productsSlice';
+import { importProcuctsFromDatabase } from './redux/productsSlice';
+import { importUsers } from './redux/profileSlice';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,10 +19,16 @@ function AppContent() {
   useEffect(() => {
 
     async function getProducts() {
-      const productsObj = await fetchProducts();
-      dispatch(importProcuctsFromDatabase({products: productsObj.products}))
+      const productsArray = await fetchProducts();
+      dispatch(importProcuctsFromDatabase({products: productsArray}))
     }
 
+    async function getUsers() {
+      const usersArray = await fetchUsers();
+      dispatch(importUsers({users: usersArray}))
+    }
+
+    getUsers();
     getProducts();
 
   }, [])

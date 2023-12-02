@@ -5,12 +5,15 @@ import { allUsers } from "../components/Profile/Users";
 const profileSlice = createSlice({
     name: "profile",
     initialState: {
-        users: allUsers,
+        users: [],
         userLoggedIn: false,
         loggedUser: {},
         favoriteProducts: []
     },
     reducers: {
+        importUsers: (state, action) => {
+            state.users = action.payload.users;
+        },
         logIn: (state) => {
             state.userLoggedIn = true;
         },
@@ -53,6 +56,7 @@ const profileSlice = createSlice({
 
 const profileReducer = profileSlice.reducer;
 
+export const importUsers = profileSlice.actions.importUsers;
 export const logIn = profileSlice.actions.logIn;
 export const logOut = profileSlice.actions.logOut;
 export const registerUser = profileSlice.actions.registerUser;

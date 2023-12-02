@@ -1,7 +1,6 @@
 import { Pressable, StyleSheet, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
-import { fetchOneProduct } from "../HttpRequests/httpRequests";
 
 function AddToCartButton(props) {
     

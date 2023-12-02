@@ -3,6 +3,7 @@ export const allProducts = [
     
     {
         id: 1,
+        index: 0,
         title: "Iphone 15",
         brand: "Apple",
         price: 895,
@@ -10,8 +11,8 @@ export const allProducts = [
         colors: ["red"],
         stores: ["Galerija SC, Beo SC"],
         comments: [],
-        raiting: [],
-        avgRaiting: 0,
+        ratings: [],
+        avgRating: 0,
         images: [
             require("../../assets/Products/iphone-15.jpg"),
             require("../../assets/Products/iphone-15-2.jpg"),
@@ -23,6 +24,7 @@ export const allProducts = [
     }, 
     {
         id: 2,
+        index: 1,
         title: "Galaxy S23",
         brand: "Samsung",
         price: 895,
@@ -30,8 +32,8 @@ export const allProducts = [
         colors: ["black", "white"],
         stores: ["SC Usce, Beo SC"],
         comments: [],
-        raiting: [],
-        avgRaiting: 0,
+        ratings: [],
+        avgRating: 0,
         images: [
             require("../../assets/Products/galaxy-s23.jpg"),
             require("../../assets/Products/galaxy-s23-2.png"),
@@ -42,6 +44,7 @@ export const allProducts = [
     }, 
     {
         id: 3,
+        index: 2,
         title: "Xiaomi 14 Pro",
         brand: "Xiaomi",
         price: 1000,
@@ -49,8 +52,8 @@ export const allProducts = [
         colors: ["green"],
         stores: ["BIG, Beo SC"],
         comments: [],
-        raiting: [],
-        avgRaiting: 0,
+        ratings: [],
+        avgRating: 0,
         images: [
             require("../../assets/Products/xiaomi-14-pro.jpg"),
             require("../../assets/Products/xiaomi-14-pro-2.jpg"),
@@ -61,6 +64,7 @@ export const allProducts = [
     }, 
     {
         id: 4,
+        index: 3,
         title: "Mate 60 Pro",
         brand: "Huawei",
         price: 990,
@@ -68,8 +72,8 @@ export const allProducts = [
         colors: ["gray"],
         stores: ["Delta City"],
         comments: [],
-        raiting: [],
-        avgRaiting: 0,
+        ratings: [],
+        avgRating: 0,
         images: [
             require("../../assets/Products/huawei-mate-60-pro.jpg"),
             require("../../assets/Products/huawei-mate-60-pro-2.png"),

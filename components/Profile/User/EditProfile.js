@@ -10,7 +10,6 @@ function EditProfile() {
     const dispatch = useDispatch();
 
     const loggedUser = useSelector(state => state.profileActions.loggedUser);
-    console.log(loggedUser);
 
     const [firstName, setFirstName] = useState(loggedUser.firstName);
     const [lastName, setLastName] = useState(loggedUser.lastName);
@@ -63,7 +62,6 @@ function EditProfile() {
             setErrorMessage(message);
             setModalVisible(true);
             dispatch(updateUser({user: user}))
-            console.log(loggedUser);
             setFieldsArray([]);
         }
     }

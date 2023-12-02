@@ -19,6 +19,7 @@ function ProductImageSlider(props) {
                 renderItem={(image) => {
                         return(
                             <SliderItem
+                                key = {Math.random()}
                                 image = {image.item}
                             />
                         )

@@ -1,6 +1,7 @@
 import { Pressable, StyleSheet, Text } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+import { fetchOneProduct } from "../HttpRequests/httpRequests";
 
 function AddToCartButton(props) {
     
@@ -10,7 +11,7 @@ function AddToCartButton(props) {
         if(typeof props.quantityNumber !== "undefined") {
             dispatch(addToCart({item: props.item, quantityNumber: props.quantityNumber}))
         } else dispatch(addToCart({item: props.item, quantityNumber: 1}))
-        
+
     }
 
     return(

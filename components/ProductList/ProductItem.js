@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { Image, Pressable, View, StyleSheet, Text } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import AddToCartButton from "./AddToCartButton";
@@ -6,7 +5,6 @@ import AddToCartButton from "./AddToCartButton";
 
 function ProductItem(props) {
 
-    const itemRef = useRef();
     function NavigationHandler() {
         if(typeof props.navigation !== "undefined" && props.navigation !== null) {
             props.navigation.navigate("ProductDetails", {
@@ -24,7 +22,7 @@ function ProductItem(props) {
                 <Text style={styles.title} >{props.item.item.title}</Text>
                 <View style={styles.brandAndViewMore}>
                     <Text style={styles.brand} >{props.item.item.brand}</Text>
-                    <Pressable style={styles.viewMore} ref={itemRef} onPress={NavigationHandler}>
+                    <Pressable style={styles.viewMore}  onPress={NavigationHandler}>
                         <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
                     </Pressable>
                 </View>

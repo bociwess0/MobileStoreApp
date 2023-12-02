@@ -15,7 +15,7 @@ function Dashboard() {
             <ProfileImageContent firstName={loggedUser.firstName} lastName={loggedUser.lastName}/>
             <ProfileTabItem image={require("../../../assets/Profile/edit.png")} name = {"Edit Profile"} logout={false} navigateTo={"EditProfile"}/>
             <ProfileTabItem image={require("../../../assets/Profile/profile-favorites.png")} name = {"Favorites"} logout={false} navigateTo={"Favorites"}/>
-            <ProfileTabItem image={require("../../../assets/Profile/order-history.png")} name = {"Order History"} logout={false} navigateTo={"OrderHistory"} />
+            {/* <ProfileTabItem image={require("../../../assets/Profile/order-history.png")} name = {"Order History"} logout={false} navigateTo={"OrderHistory"} /> */}
             <ProfileTabItem image={require("../../../assets/Profile/logout.png")} name = {"Logout"} logout={true} />
         </View>
     )

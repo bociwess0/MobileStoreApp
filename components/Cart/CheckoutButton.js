@@ -18,7 +18,6 @@ function CheckoutButton(props) {
     const cartTotal = useSelector(state => state.cartActions.cartTotal);
 
     function handleConfirmPage() {
-        console.log(props.enteredCoupon);
         if(props.enteredCoupon !== "") dispatch(calculateCoupon());
         props.onShowCartConfirm();
         props.setCoupon('');

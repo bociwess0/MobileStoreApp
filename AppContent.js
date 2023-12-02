@@ -1,47 +1,57 @@
-import { Image, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import FooterNavigation from './Layout/Footer';
-import HeaderNavigation from './Layout/Header';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Products from './pages/Products';
 import ProductDetails from './pages/ProductDetails';
-import { useSelector } from 'react-redux';
-import SearchModal from './components/Search/SearchModal';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Cart from './pages/Cart';
+import { fetchProducts, storeProduct } from './components/HttpRequests/httpRequests';
+import { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { importDB_ID, importProcuctsFromDatabase } from './redux/productsSlice';
 
 const Stack = createNativeStackNavigator();
-const Tab = createBottomTabNavigator();
 
 function AppContent() {
 
-    return(
-        <>
-            
-            <View style={styles.mainContentWrapper}>
-                    <NavigationContainer >
-                    <Stack.Navigator  screenOptions={{
-                        headerShown: false,
-                        tabBarShowLabel: false,
-                        animation: "slide_from_right"
-                      }}
-                    >
-                        <Stack.Screen 
-                        name="Products"
-                        component={FooterNavigation}
-                        />
-                        <Stack.Screen 
-                        name="ProductDetails"
-                        component={ProductDetails}
-                        
-                        />
-                    </Stack.Navigator>
-                    </NavigationContainer>
-                </View>
-            
-        </>
-    )
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+
+    async function getProducts() {
+      const productsObj = await fetchProducts();
+      dispatch(importProcuctsFromDatabase({products: productsObj.products}))
+    }
+
+    getProducts();
+
+  }, [])
+
+  return(
+      <>
+          
+          <View style={styles.mainContentWrapper}>
+                  <NavigationContainer >
+                  <Stack.Navigator  screenOptions={{
+                      headerShown: false,
+                      tabBarShowLabel: false,
+                      animation: "slide_from_right"
+                    }}
+                  >
+                      <Stack.Screen 
+                      name="Products"
+                      component={FooterNavigation}
+                      />
+                      <Stack.Screen 
+                      name="ProductDetails"
+                      component={ProductDetails}
+                      
+                      />
+                  </Stack.Navigator>
+                  </NavigationContainer>
+              </View>
+          
+      </>
+  )
 }
 
 const styles = StyleSheet.create({

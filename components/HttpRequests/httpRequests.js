@@ -55,8 +55,17 @@ export async function registerUserToDB(newUser) {
 }
 
 export async function updateUserInDB(user) {
-    console.log(user);
     axios.put(URL + `users/${user.id}.json`, user.user);
 }
-    
 
+export async function addToFavoritesDB(userKey, product) {
+    const response = await axios.post(URL + `users/${userKey}/favoriteProducts.json`, product);
+
+
+    return response.data.name;
+
+}
+    
+export async function deleteFromFavoritesDB(userKey, productKey) {
+    axios.delete(URL + `users/${userKey}/favoriteProducts/${productKey}.json`);
+}

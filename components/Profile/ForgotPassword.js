@@ -3,8 +3,9 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { updateUserInDB } from "../HttpRequests/httpRequests";
+import { updateUser } from "../../redux/profileSlice";
 
 
 function ForgotPassword() {
@@ -13,6 +14,7 @@ function ForgotPassword() {
 
     const navigation = useNavigation();
     const allUsers = useSelector(state => state.profileActions.users);
+    const dispatch = useDispatch();
 
     const [fieldsArray, setFieldsArray] = useState([]);
 
@@ -113,6 +115,7 @@ function ForgotPassword() {
                     }
                 }
                 await updateUserInDB(userNewInfo);
+                dispatch(updateUser({user: userNewInfo.user}));
                 message = "Password is successfully changed! You can now login."
                 setErrorMessage(message);
                 setModalVisible(true);

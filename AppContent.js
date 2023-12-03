@@ -4,7 +4,7 @@ import FooterNavigation from './Layout/Footer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './pages/ProductDetails';
-import { fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
+import { addToFavoritesDB, fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { importProcuctsFromDatabase } from './redux/productsSlice';

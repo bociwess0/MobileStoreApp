@@ -42,8 +42,6 @@ export const ValidateFields = (fields) => {
 
 export const ValidateUser = (email, listOfUsers) => {
 
-    console.log(listOfUsers);
-
     const userExists = listOfUsers.find((user) => user.user.email === email);
 
     return (typeof userExists !== "undefined") ? true : false;

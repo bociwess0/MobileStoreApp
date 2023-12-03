@@ -50,7 +50,18 @@ const profileSlice = createSlice({
                 state.users[foundedUserIndex] = newUser;
             }
 
-        }
+        },
+        updateUser: (state, action) => {
+
+            const newUser = action.payload.user;
+            
+            const foundedUserIndex = state.users.findIndex((user) => user.user.email === newUser.email);
+
+            if(foundedUserIndex !== -1) {
+                state.users[foundedUserIndex].user = newUser;
+            }
+
+        },
     }
 })
 
@@ -62,6 +73,7 @@ export const logOut = profileSlice.actions.logOut;
 export const registerUser = profileSlice.actions.registerUser;
 export const loginUser = profileSlice.actions.loginUser;
 export const updateLoggedUser = profileSlice.actions.updateLoggedUser;
+export const updateUser = profileSlice.actions.updateUser;
 export const addToFavorites = profileSlice.actions.addToFavorites;
 export const removeFromFavorites = profileSlice.actions.removeFromFavorites;
 

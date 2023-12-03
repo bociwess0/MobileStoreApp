@@ -3,20 +3,32 @@ import { useDispatch, useSelector } from "react-redux";
 import { addToFavorites, removeFromFavorites } from "../../../redux/profileSlice";
 import { useState } from "react";
 import { useEffect } from "react";
+import { addToFavoritesDB, deleteFromFavoritesDB } from "../../HttpRequests/httpRequests";
 
 function FavoritesButton(props) {
 
     const dispatch = useDispatch();
 
     const favoriteProducts = useSelector(state => state.profileActions.favoriteProducts);
+    const loggedUser = useSelector(state => state.profileActions.loggedUser);
 
-    function handleFavoritesButton() {
+    async function handleFavoritesButton() {
+
         const foundObject = favoriteProducts.find((item) => item.id === props.product.id);
 
         if (!foundObject) {
-            dispatch(addToFavorites({product: props.product}));
+            let productKey = await addToFavoritesDB(loggedUser.id, props.product);
+            dispatch(addToFavorites({product: {
+                ...props.product,
+                productKey: productKey
+            }}));
         } else {
-            dispatch(removeFromFavorites({item: props.product}));
+
+            const foundProduct = favoriteProducts.find((product) => product.id === props.product.id);
+            if(foundProduct) {
+                await deleteFromFavoritesDB(loggedUser.id, foundProduct.productKey);
+                dispatch(removeFromFavorites({item: props.product}));
+            }
         }
     }
 

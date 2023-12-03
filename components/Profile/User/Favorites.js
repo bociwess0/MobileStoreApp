@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { removeFromFavorites } from "../../../redux/profileSlice";
 import PopupModal from "../../Modals/Popup";
+import { deleteFromFavoritesDB } from "../../HttpRequests/httpRequests";
 
 
 function Favorites() {
@@ -24,7 +25,8 @@ function Favorites() {
         setTargetItem(item);
     }
 
-    function removeFromFavoritesHandler() {
+    async function removeFromFavoritesHandler() {
+        deleteFromFavoritesDB(loggedUser.id, targetItem.productKey);
         dispatch(removeFromFavorites({item: targetItem}));
     }
 

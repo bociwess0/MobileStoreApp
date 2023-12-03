@@ -6,11 +6,7 @@ const URL = "https://rn-project-93ce7-default-rtdb.firebaseio.com/";
 let products_DB_ID = '';
 let users_DB_ID = '';
 
-export function storeProduct() {
-    axios.post(URL + "products.json", { allProducts: allProducts} )
-}
-
-
+//Product requests
 
 export async function fetchProducts() {
     const response = await axios.get(URL + "products.json");
@@ -31,31 +27,24 @@ export async function fetchProducts() {
 
 }
 
+//User reqeusts
+
 export async function fetchUsers() {
     const response = await axios.get(URL + 'users.json');
 
     const users = [];
 
     for(const key in response.data) {
-        const usersArray = {
-            id: key,
-            users: response.data[key].Allusers
-        }
-
-        users.push(usersArray)
+        users.push(response.data[key]);
     }
 
-    users_DB_ID = users[0].id;
-
-    return users[0].users;
+    return users;
 
 }
 
-export async function fetchOneProduct(productIndex) {
+export async function registerUserToDB(newUser) {
 
-    const product = await axios.get(URL + `products/${products_DB_ID}/allProducts/${productIndex}.json`);
-
-    return product.data;
+    axios.post(URL + `users.json`, newUser);
 
 }
     

@@ -5,6 +5,7 @@ import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
 import { registerUser } from "../../redux/profileSlice";
 import { useDispatch } from "react-redux";
+import { registerUserToDB } from "../HttpRequests/httpRequests";
 
 function RegisterForm() {
 
@@ -64,7 +65,8 @@ function RegisterForm() {
             setGoToLoginPage(false)
         } else {
             message = "Registration successful! You can now login."
-            dispatch(registerUser({user: user}));
+            registerUserToDB(user);
+            // dispatch(registerUser({user: user}));
             setErrorMessage(message);
             setGoToLoginPage(true)
             setModalVisible(true);

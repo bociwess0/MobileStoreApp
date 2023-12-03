@@ -5,33 +5,42 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './pages/ProductDetails';
 import { fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { importProcuctsFromDatabase } from './redux/productsSlice';
 import { importUsers } from './redux/profileSlice';
+import LoadingOverlay from './Layout/LoadingOverlay';
 
 const Stack = createNativeStackNavigator();
 
 function AppContent() {
 
   const dispatch = useDispatch();
+  const users = useSelector(state => state.profileActions.users);
+
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
 
     async function getProducts() {
+      setIsLoading(true);
       const productsArray = await fetchProducts();
       dispatch(importProcuctsFromDatabase({products: productsArray}))
+      setIsLoading(false);
     }
 
     async function getUsers() {
       const usersArray = await fetchUsers();
       dispatch(importUsers({users: usersArray}))
     }
-
-    getUsers();
+    if(!users || users.length === 0) getUsers();
     getProducts();
 
   }, [])
+
+  if(isLoading) {
+    return <LoadingOverlay />
+  }
 
   return(
       <>

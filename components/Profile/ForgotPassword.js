@@ -3,15 +3,20 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
+import { useSelector } from "react-redux";
+import { updateUserInDB } from "../HttpRequests/httpRequests";
+
 
 function ForgotPassword() {
 
     //variables
 
     const navigation = useNavigation();
+    const allUsers = useSelector(state => state.profileActions.users);
 
     const [fieldsArray, setFieldsArray] = useState([]);
 
+    const [enteredEmail, setEnteredEmail] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [retypedPassword, setRetypedPassword] = useState('');
 
@@ -19,8 +24,23 @@ function ForgotPassword() {
     const [errorMessage, setErrorMessage] = useState('');
     const [goToLoginPage, setGoToLoginPage] = useState(false);
 
+    const [codeSent, setCodeSent] = useState(false);
+
 
     //functions
+
+    const generateRandomString = () => {
+        const length = 5;
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+      
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * characters.length);
+          result += characters.charAt(randomIndex);
+        }
+      
+        return result;
+      };
 
     function goToLogin() {
         navigation.navigate("Login");
@@ -37,27 +57,66 @@ function ForgotPassword() {
         })
     }
 
-    function SubmitHandler() {
-        fieldPushHandler('newPassword', newPassword)
-        fieldPushHandler('retypedPassword', retypedPassword)
+    function userExists(email) {
+        const foundUser = allUsers.find((user) => user.user.email === email);
 
+        if(foundUser) return foundUser;
+        else return false;
+
+    }
+
+    function VerifyEmail() {
+        fieldPushHandler('email', enteredEmail)
         let message = ValidateFields(fieldsArray);
 
         if(message !== "OK") {
             setModalVisible(true);
             setErrorMessage(message);
             setGoToLoginPage(false)
+        } else if(message === "OK" && !userExists(enteredEmail)) {
+            setModalVisible(true);
+            setErrorMessage("User with this email does not exists.");
+            setGoToLoginPage(false)
         } else {
-            message = "Password is successfully changed! You can now login."
-            setErrorMessage(message);
+            setCodeSent(true);
+        }
 
+        setFieldsArray([]);
+    }
+
+    async function SubmitHandler() {
+        fieldPushHandler('newPassword', newPassword)
+        fieldPushHandler('retypedPassword', retypedPassword)
+
+        let message = ValidateFields(fieldsArray);
+        let foundUser = userExists(enteredEmail);
+
+        if(message !== "OK") {
+            setModalVisible(true);
+            setErrorMessage(message);
+            setGoToLoginPage(false)
+        } else {
             if(newPassword !== retypedPassword) {
                 setErrorMessage("Passwords must be equal!");
                 setModalVisible(true);
                 setGoToLoginPage(false)
             } else {
-                setGoToLoginPage(true)
+                let userNewInfo = {
+                    id: foundUser.id,
+                    user: {
+                        address: foundUser.user.address,
+                        city: foundUser.user.city,
+                        email: foundUser.user.email,
+                        firstName: foundUser.user.firstName,
+                        lastName: foundUser.user.lastName,
+                        password: newPassword
+                    }
+                }
+                await updateUserInDB(userNewInfo);
+                message = "Password is successfully changed! You can now login."
+                setErrorMessage(message);
                 setModalVisible(true);
+                setCodeSent(true);
                 setFieldsArray([]);
             }
         }
@@ -68,11 +127,15 @@ function ForgotPassword() {
         <View style={styles.forgotenPasswordForm}>
             <Text style={{fontSize: 24, color: "#B4236C", textAlign: "center", fontWeight: 500}} >Forgotten Password</Text>
             <View style={{display: "flex", flexDirection: "column", justifyContent: "center",alignItems: "center", gap: 15}}>
-                <TextInput style={styles.inputContainer} placeholder="New Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setNewPassword(text)}/>
-                <TextInput style={styles.inputContainer} placeholder="Retype Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setRetypedPassword(text)} />
-                <Pressable style={styles.loginButton}onPress={SubmitHandler} >
-                    <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>CHANGE PASSWORD</Text>
-                </Pressable>
+                {!codeSent && <TextInput style={styles.inputContainer} placeholder="Email" placeholderTextColor="#fff" onChangeText={(text) => setEnteredEmail(text)} />}
+                {!codeSent && <Pressable style={({pressed}) => [styles.loginButton, {opacity: pressed ? 0.7 : 1}]} onPress={VerifyEmail} >
+                                <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>VERIFY EMAIL</Text>
+                            </Pressable>}
+                {codeSent && <TextInput style={styles.inputContainer} placeholder="New Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setNewPassword(text)}/>}
+                {codeSent && <TextInput style={styles.inputContainer} placeholder="Retype Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setRetypedPassword(text)} />}
+                {codeSent && <Pressable style={styles.loginButton}onPress={SubmitHandler} >
+                                <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>CHANGE PASSWORD</Text>
+                            </Pressable>}
                 <Pressable onPress={goToLogin}>
                     <Text style={{fontSize: 16, color: "#B4236C", textAlign: "center"}} >Log In</Text>
                 </Pressable>

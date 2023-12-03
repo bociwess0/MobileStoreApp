@@ -35,7 +35,13 @@ export async function fetchUsers() {
     const users = [];
 
     for(const key in response.data) {
-        users.push(response.data[key]);
+
+        let userObj = {
+            id: key,
+            user: response.data[key]
+        }
+
+        users.push(userObj);
     }
 
     return users;
@@ -46,6 +52,11 @@ export async function registerUserToDB(newUser) {
 
     axios.post(URL + `users.json`, newUser);
 
+}
+
+export async function updateUserInDB(user) {
+    console.log(user);
+    axios.put(URL + `users/${user.id}.json`, user.user);
 }
     
 

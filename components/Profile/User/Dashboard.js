@@ -8,7 +8,7 @@ function Dashboard() {
 
     const {width, height} = useWindowDimensions();
 
-    const loggedUser = useSelector(state => state.profileActions.loggedUser);
+    const loggedUser = useSelector(state => state.profileActions.loggedUser.user);
 
     return (
         <View style={[styles.dashboardWrapper, {width: width, height: height}]}>

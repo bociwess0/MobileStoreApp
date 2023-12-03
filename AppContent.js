@@ -33,7 +33,7 @@ function AppContent() {
       const usersArray = await fetchUsers();
       dispatch(importUsers({users: usersArray}))
     }
-    if(!users || users.length === 0) getUsers();
+    if(!users || users.length === 0) getUsers();    
     getProducts();
 
   }, [])

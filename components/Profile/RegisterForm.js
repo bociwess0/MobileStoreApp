@@ -88,7 +88,7 @@ function RegisterForm() {
                 <TextInput style={styles.inputContainer} placeholder="Address" placeholderTextColor="#fff" onChangeText={(text) => setAddress(text)} />
                 <TextInput style={styles.inputContainer} placeholder="City" placeholderTextColor="#fff" onChangeText={(text) => setCity(text)} />
 
-                <Pressable style={styles.loginButton} onPress={SubmitHandler}>
+                <Pressable style={({pressed}) => [styles.loginButton, {opacity: pressed ? 0.7 : 1}]} onPress={SubmitHandler}>
                     <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>SIGN UP</Text>
                 </Pressable>
                 <Pressable onPress={goToLogin}>

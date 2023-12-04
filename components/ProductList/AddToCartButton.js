@@ -14,7 +14,7 @@ function AddToCartButton(props) {
     }
 
     return(
-        <Pressable style={styles.addToCartButton} onPress={handleAddToCart}>
+        <Pressable style={({pressed}) => [styles.addToCartButton, {opacity: pressed ? 0.7 : 1}]} onPress={handleAddToCart}>
             <Text style={{fontSize: 14, color: "#fff"}}>Add To Cart</Text>
         </Pressable>
     )

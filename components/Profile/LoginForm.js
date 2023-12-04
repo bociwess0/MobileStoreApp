@@ -84,7 +84,7 @@ function LoginForm() {
                 <Pressable onPress={forgotenPassword}>
                     <Text style={{fontSize: 12, color: "#dea0bf", textAlign: "center", marginBottom: 40}} >Forgot Password?</Text>
                 </Pressable>
-                <Pressable style={styles.loginButton}onPress={SubmitHandler} >
+                <Pressable style={({pressed}) => [styles.loginButton, {opacity: pressed ? 0.7 : 1}]} onPress={SubmitHandler} >
                     <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>LOG IN</Text>
                 </Pressable>
                 <Pressable onPress={goToRegister}>

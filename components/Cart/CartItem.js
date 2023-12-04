@@ -24,7 +24,7 @@ function CartItem(props) {
                     <Text style={{fontSize: 14, color:"#fff"}}>{`Quantity: ${props.item.item.quantity}`}</Text>
                 </View>
                 {props.showRemoveProductButton && 
-                <Pressable style={styles.removeFromCartButton} onPress={removeFromCartHandler}>
+                <Pressable style={({pressed}) => [styles.removeFromCartButton, {opacity: pressed ? 0.7 : 1}]} onPress={removeFromCartHandler}>
                         <Text style={{fontSize: 14, color: "#fff"}}>Remove From Cart</Text>
                 </Pressable>}
             </View>

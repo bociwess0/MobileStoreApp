@@ -25,7 +25,7 @@ function ValidationPopup(props) {
           <View style={styles.textWrapper}>
             <Text style={{fontSize: 16, color: "#1A1A1A", textAlign: "center"}}>{props.message}</Text>
           </View>
-          <Pressable style={[styles.declineButton, {backgroundColor: buttonColor}]} onPress={CloseModal}>
+          <Pressable style={({pressed}) => [styles.declineButton, {opacity: pressed ? 0.7 : 1, backgroundColor: buttonColor}]} onPress={CloseModal}>
               <Text style={{color: "#fff"}} >{buttonText}</Text>
           </Pressable>
         </View>

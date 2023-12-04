@@ -69,3 +69,20 @@ export async function addToFavoritesDB(userKey, product) {
 export async function deleteFromFavoritesDB(userKey, productKey) {
     axios.delete(URL + `users/${userKey}/favoriteProducts/${productKey}.json`);
 }
+
+export async function fetchFavorites(userKey) {
+    const response = await axios.get(URL + `users/${userKey}/favoriteProducts.json`);
+
+    const favoritesArray = [];
+
+    for(const key in response.data) {
+        const productObj = {
+            ...response.data[key],
+            productKey: key,
+        }
+        favoritesArray.push(productObj);
+    }
+
+    return favoritesArray;
+
+}

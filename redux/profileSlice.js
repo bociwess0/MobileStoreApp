@@ -20,6 +20,7 @@ const profileSlice = createSlice({
         logOut: (state) => {
             state.userLoggedIn = false;
             state.loggedUser = {};
+            state.favoriteProducts = [];
         },
         registerUser: (state, action) => {
             state.users.push(action.payload.user);

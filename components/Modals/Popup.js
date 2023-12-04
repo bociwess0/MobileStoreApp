@@ -24,10 +24,10 @@ function PopupModal(props) {
             <Text style={{fontSize: 16, color: "#1A1A1A", textAlign: "center"}}>{props.message}</Text>
           </View>
           <View style={styles.buttonsWrapper}>
-            {!props.disableConfirm && <Pressable style={styles.confirmButton} onPress={handleModalAction}>
+            {!props.disableConfirm && <Pressable style={({pressed}) => [styles.confirmButton, {opacity: pressed ? 0.7 : 1}]} onPress={handleModalAction}>
                                       <Text style={{color: "#fff"}}>Yes</Text>
                                     </Pressable>}
-            <Pressable style={styles.declineButton} onPress={CloseModal}>
+            <Pressable style={({pressed}) => [styles.declineButton, {opacity: pressed ? 0.7 : 1}]} onPress={CloseModal}>
               <Text style={{color: "#fff"}} >{closeText}</Text>
             </Pressable>
           </View>

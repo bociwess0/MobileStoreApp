@@ -23,16 +23,19 @@ const productsSlice = createSlice({
             
             let sum = 0;
 
-            let foundProductIndex = state.products.findIndex((product) => product.id === action.payload.product.id);
+            let foundProductIndex = state.products.findIndex((product) => product.productKey === action.payload.productKey);
 
             if(foundProductIndex !== -1) {
-                for(let rating of state.products[foundProductIndex].ratings) {
+                for(let rating of state.products[foundProductIndex].product.ratings) {
                     sum += rating;
                 }
 
-                state.products[foundProductIndex].avgRating = sum / state.products[foundProductIndex].ratings.length;
+                const newAvg = sum / state.products[foundProductIndex].product.ratings.length;
+                state.products[foundProductIndex].product.avgRating = parseFloat(newAvg.toFixed(2));
 
             }
+
+            console.log(state.products[foundProductIndex].product.avgRating);
 
         }
     }

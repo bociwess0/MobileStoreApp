@@ -12,8 +12,6 @@ function ProductDetailInfo(props) {
 
     const selectedItem = props.item;
 
-    console.log(selectedItem);
-
     const selectedItemKey = props.itemKey;
     const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
 

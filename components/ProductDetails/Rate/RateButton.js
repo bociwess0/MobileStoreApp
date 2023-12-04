@@ -21,13 +21,14 @@ function RateButton(props) {
     const handleRating = (value) => {
 
         dispatch(rateProduct({productKey: props.productKey, rating: value}));
+        dispatch(calculateAvgRating({productKey: props.productKey}));
         
-        const foundProduct = (products.find((product) => product.productKey === props.productKey)).product;
+        const foundProduct = (productsNew.find((product) => product.productKey === props.productKey)).product;
 
         const updatedProduct = {
             productKey: props.productKey,
             product: {
-                ...props.product,
+                ...foundProduct,
                 ratings: (foundProduct.ratings) ? [...foundProduct.ratings, value] : [value]
             }
         }

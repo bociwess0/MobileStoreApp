@@ -12,7 +12,7 @@ function Products({navigation}) {
     const products = useSelector(state => state.productsActions.products)
 
     const {width, height} = useWindowDimensions();
-
+    
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >

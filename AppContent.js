@@ -4,12 +4,13 @@ import FooterNavigation from './Layout/Footer';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetails from './pages/ProductDetails';
-import { addToFavoritesDB, fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
+import { addProduct, addToFavoritesDB, fetchProducts, fetchUsers } from './components/HttpRequests/httpRequests';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { importProcuctsFromDatabase } from './redux/productsSlice';
 import { importUsers } from './redux/profileSlice';
 import LoadingOverlay from './Layout/LoadingOverlay';
+import { allProducts } from './components/ProductList/AllProducts';
 
 const Stack = createNativeStackNavigator();
 

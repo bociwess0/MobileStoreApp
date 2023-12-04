@@ -3,8 +3,6 @@ import { allProducts } from "../ProductList/AllProducts";
 import { allUsers } from "../Profile/Users";
 
 const URL = "https://rn-project-93ce7-default-rtdb.firebaseio.com/";
-let products_DB_ID = '';
-let users_DB_ID = '';
 
 //Product requests
 
@@ -15,16 +13,22 @@ export async function fetchProducts() {
 
     for(const key in response.data) {
         const productsArray = {
-            id: key,
-            products: response.data[key].allProducts      
+            productKey: key,
+            product: response.data[key]      
         }
         products.push(productsArray);
     }
 
-    products_DB_ID = products[0].id;
+    return products;
 
-    return products[0].products;
+}
 
+export async function addProduct(product) {
+    axios.post(URL + "products.json", product);
+}
+
+export async function updateProduct(productKey, newProduct) {
+    axios.put(URL + `products/${productKey}.json`, newProduct);
 }
 
 //User reqeusts

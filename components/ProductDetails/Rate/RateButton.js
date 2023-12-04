@@ -1,16 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Pressable, StyleSheet, Text } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateAvgRating, rateProduct } from "../../../redux/productsSlice";
+import { updateProduct } from "../../HttpRequests/httpRequests";
 
 function RateButton(props) {
     
     const dispatch = useDispatch();
     const loggedUser = useSelector(state => state.profileActions.loggedUser);
+    const products = useSelector(state => state.productsActions.products);
+    let productsNew = products;
 
-    const handleRating = (value) =>{
-        dispatch(rateProduct({productId: props.product.id, userEmail: loggedUser.email, rating: value}));
+    useEffect(() => {
+        productsNew = products;
+    }, [products]);
+
+    
+
+    const handleRating = (value) => {
+
+        dispatch(rateProduct({productKey: props.productKey, rating: value}));
+        
+        const foundProduct = (products.find((product) => product.productKey === props.productKey)).product;
+
+        const updatedProduct = {
+            productKey: props.productKey,
+            product: {
+                ...props.product,
+                ratings: (foundProduct.ratings) ? [...foundProduct.ratings, value] : [value]
+            }
+        }
+
+        updateProduct(updatedProduct.productKey, updatedProduct.product);
     }
 
     return(

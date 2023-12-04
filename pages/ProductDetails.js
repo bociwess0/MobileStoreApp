@@ -9,8 +9,8 @@ function ProductDetails(props) {
 
     return(
         <View style={styles.productDetailWrapper}>
-            <ProductImageSlider item={route.params.selectedItem} />
-            <ProductDetailInfo item={route.params.selectedItem} />
+            <ProductImageSlider item={route.params.selectedItem}  />
+            <ProductDetailInfo item={route.params.selectedItem} itemKey={route.params.itemKey} />
         </View>
     )
 }

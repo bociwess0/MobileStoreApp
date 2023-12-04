@@ -11,6 +11,10 @@ import RateButton from "./Rate/RateButton";
 function ProductDetailInfo(props) {
 
     const selectedItem = props.item;
+
+    console.log(selectedItem);
+
+    const selectedItemKey = props.itemKey;
     const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
 
     const [quantityNumber, setQuantityNumber] = useState(1);
@@ -54,7 +58,7 @@ function ProductDetailInfo(props) {
                         onIncreaseQuantity={increaseQuantityHandler} 
                         onReduceQuantity={reduceQuantityHandler}
                     />
-                    {userLoggedIn && <RateButton product={selectedItem} />}
+                    {userLoggedIn && <RateButton product={selectedItem} productKey={selectedItemKey} />}
                 </View>
             </View>
             <View style={styles.priceAndButton}>

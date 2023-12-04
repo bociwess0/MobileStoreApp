@@ -8,7 +8,7 @@ function ProductItem(props) {
     function NavigationHandler() {
         if(typeof props.navigation !== "undefined" && props.navigation !== null) {
             props.navigation.navigate("ProductDetails", {
-                selectedItem: props.item.item
+                selectedItem: props.item.item.product, itemKey: props.item.item.productKey
             });
         }
     }
@@ -16,25 +16,25 @@ function ProductItem(props) {
     return(
         <View style={styles.productItemWrapper}>
             <View style={styles.imageWrapper}>
-                <Image style={styles.image} source={props.item.item.images[1]} />
+                <Image style={styles.image} source={props.item.item.product.images[1]} />
             </View>
             <View style={styles.textWrapper}>
-                <Text style={styles.title} >{props.item.item.title}</Text>
+                <Text style={styles.title} >{props.item.item.product.title}</Text>
                 <View style={styles.brandAndViewMore}>
-                    <Text style={styles.brand} >{props.item.item.brand}</Text>
+                    <Text style={styles.brand} >{props.item.item.product.brand}</Text>
                     <Pressable style={styles.viewMore}  onPress={NavigationHandler}>
                         <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
                     </Pressable>
                 </View>
                 <SelectDropdown 
-                    data={props.item.item.colors}
+                    data={props.item.item.product.colors}
                     defaultValue="Choose color"
                     buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 100, marginTop: 15}}
                     buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
                 />
                 <View style={styles.priceAndButton}>
-                    <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.price}€`}</Text>
-                    <AddToCartButton item = {props.item.item} />
+                    <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.product.price}€`}</Text>
+                    <AddToCartButton item = {props.item.item.product} />
                 </View>
             </View>
         </View>

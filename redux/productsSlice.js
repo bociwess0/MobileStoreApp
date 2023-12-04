@@ -11,11 +11,11 @@ const productsSlice = createSlice({
         },
         rateProduct: (state, action) => {
 
-            let foundProductIndex = state.products.findIndex((product) => product.id === action.payload.productId);
+            let foundProductIndex = state.products.findIndex((product) => product.productKey === action.payload.productKey);
 
             if(foundProductIndex !== -1) {
 
-                state.products[foundProductIndex].ratings.push({user: action.payload.userEmail, rating: action.payload.rating})
+                state.products[foundProductIndex].product.ratings.push(action.payload.rating)
             }
 
         },

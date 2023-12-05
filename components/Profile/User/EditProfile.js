@@ -4,13 +4,14 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ValidateFields } from "../Validation/Validation";
 import { updateUser } from "../../../redux/profileSlice";
+import { addToFavoritesDB, updateUserInDB } from "../../HttpRequests/httpRequests";
 
 function EditProfile() {
 
     const dispatch = useDispatch();
 
     const loggedUser = useSelector(state => state.profileActions.loggedUser);
-
+    const favoriteProducts = useSelector(state => state.profileActions.favoriteProducts);
     const [firstName, setFirstName] = useState(loggedUser.firstName);
     const [lastName, setLastName] = useState(loggedUser.lastName);
     const [email, setEmail] = useState(loggedUser.email);
@@ -34,7 +35,7 @@ function EditProfile() {
         setModalVisible(false);
     }
     
-    function SubmitHandler() {
+    async function SubmitHandler() {
         fieldPushHandler('firstName', firstName);
         fieldPushHandler('lastName', lastName)
         fieldPushHandler('email', email)
@@ -62,6 +63,13 @@ function EditProfile() {
             setErrorMessage(message);
             setModalVisible(true);
             dispatch(updateUser({user: user}))
+            await updateUserInDB({id: loggedUser.id, user: user});
+            for(const product of favoriteProducts) {
+                await addToFavoritesDB(product);
+                
+            }
+            const usersArray = await fetchUsers();
+            dispatch(importUsers({users: usersArray}))
             setFieldsArray([]);
         }
     }

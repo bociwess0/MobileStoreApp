@@ -14,8 +14,13 @@ const productsSlice = createSlice({
             let foundProductIndex = state.products.findIndex((product) => product.productKey === action.payload.productKey);
 
             if(foundProductIndex !== -1) {
-
-                state.products[foundProductIndex].product.ratings.push(action.payload.rating)
+                if(state.products[foundProductIndex].product.ratings) {
+                    state.products[foundProductIndex].product.ratings.push(action.payload.rating);
+                } else {
+                    state.products[foundProductIndex].product.ratings = [];
+                    state.products[foundProductIndex].product.ratings.push(action.payload.rating);
+                }
+                
             }
 
         },

@@ -1,9 +1,12 @@
 import { Image, Pressable, View, StyleSheet, Text } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import AddToCartButton from "./AddToCartButton";
+import { useState } from "react";
 
 
 function ProductItem(props) {
+
+    const [selectedColor, setSelectedColor] = useState('');
 
     function NavigationHandler() {
         if(typeof props.navigation !== "undefined" && props.navigation !== null) {
@@ -31,10 +34,13 @@ function ProductItem(props) {
                     defaultValue="Choose color"
                     buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 100, marginTop: 15}}
                     buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
+                    onSelect={(selectedItem, index) => {
+                        setSelectedColor(selectedItem)
+                    }}
                 />
                 <View style={styles.priceAndButton}>
                     <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.product.price}€`}</Text>
-                    <AddToCartButton item = {props.item.item.product} />
+                    <AddToCartButton item = {props.item.item.product} color={selectedColor} />
                 </View>
             </View>
         </View>

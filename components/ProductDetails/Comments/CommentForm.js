@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { StyleSheet, Text, TextInput, View } from "react-native"
+import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
+import { ValidateFields } from "../../Profile/Validation/Validation";
+import PopupModal from "../../Modals/Popup";
 
 function CommentForm() {
 
@@ -7,6 +9,46 @@ function CommentForm() {
     const [lastName, setLastName] = useState('');
     const [email, setEmail] = useState('');
     const [textArea, setTextArea] = useState('');
+
+    const [fieldsArray, setFieldsArray] = useState([]);
+
+    const [modalVisible, setModalVisible] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+
+    function closePopupHandler() {
+        setModalVisible(false);
+    }
+
+    function fieldPushHandler(type, text) {
+        fieldsArray.push({
+            type: type,
+            text: text
+        })
+    }
+
+    function SubmitHandler() {
+        fieldPushHandler('firstName', firstName)
+        fieldPushHandler('lastName', lastName)
+        fieldPushHandler('email', email)
+        fieldPushHandler('textArea', textArea)
+
+        let message = ValidateFields(fieldsArray);
+
+        if(message !== "OK") {
+            setModalVisible(true);
+            setErrorMessage(message);
+        } else {
+            message = "Comment added successfully!"
+            setErrorMessage(message);
+            setModalVisible(true);
+            setFieldsArray([]);
+            setFirstName('');
+            setLastName('');
+            setEmail('');
+            setTextArea('');
+        }
+        setFieldsArray([]);
+    }
 
     return(
         <View style={styles.commentFormContainer}>
@@ -25,6 +67,15 @@ function CommentForm() {
                     numberOfLines={4} // Set the number of lines you want to display
                     onChangeText={(newText) => setTextArea(newText)
                     }
+                />
+                <Pressable style={({pressed}) => [styles.addCommentButton, {opacity: pressed ? 0.7 : 1}]} onPress={SubmitHandler}>
+                    <Text style={{fontSize: 14, color: "#fff"}}>Add Comment</Text>
+                </Pressable>
+                <PopupModal 
+                    isModalVisible={modalVisible}
+                    onCloseModal={closePopupHandler}
+                    message={errorMessage}
+                    disableConfirm={true} 
                 />
             </View>
         </View>
@@ -66,7 +117,16 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         textAlignVertical: 'top',
         padding: 10
-    }
+    },
+    addCommentButton: {
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+        backgroundColor: "#B4236C",
+        height: 30,
+        width: 130
+    },
 })
 
 export default CommentForm;

@@ -9,6 +9,9 @@ function AddToCartButton(props) {
     const dispatch = useDispatch();
     const [isModalVisible, setIsModalVisible] = useState(false);
     const message = 'Please choose color';
+    const width = props.productDetailPage ? 150 : 100;
+    const height = props.productDetailPage ? 40 : 30;
+    const fontSize = props.productDetailPage ? 18 : 14
 
     function handleAddToCart() {
         if(typeof props.color !== "undefined" && props.color !== '') {
@@ -29,8 +32,8 @@ function AddToCartButton(props) {
 
     return(
         <View>
-            <Pressable style={({pressed}) => [styles.addToCartButton, {opacity: pressed ? 0.7 : 1}]} onPress={handleAddToCart}>
-                <Text style={{fontSize: 14, color: "#fff"}}>Add To Cart</Text>
+            <Pressable style={({pressed}) => [styles.addToCartButton, {opacity: pressed ? 0.7 : 1, width: width, height: height}]} onPress={handleAddToCart}>
+                <Text style={{fontSize: fontSize, color: "#fff"}}>Add To Cart</Text>
             </Pressable>
             <PopupModal 
                 isModalVisible={isModalVisible}
@@ -48,9 +51,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 20,
-        height: 30,
         backgroundColor: "#B4236C",
-        width: 100
     },
 
 });

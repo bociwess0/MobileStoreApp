@@ -25,7 +25,7 @@ function ProductImageSlider(props) {
                         )
                     }
                 }
-                keyExtractor={image => image.item}
+                keyExtractor={image => Math.random()}
                 horizontal
                 showsHorizontalScrollIndicator={false}
                 pagingEnabled

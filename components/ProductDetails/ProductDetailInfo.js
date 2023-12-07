@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import FavoritesButton from "./LoggedUsersOnly/FavoritesButton";
 import AvgRating from "./Rate/AvgRating";
 import RateButton from "./Rate/RateButton";
+import CommentForm from "./Comments/CommentForm";
 
 function ProductDetailInfo(props) {
 
@@ -14,6 +15,7 @@ function ProductDetailInfo(props) {
 
     const selectedItemKey = props.itemKey;
     const userLoggedIn = useSelector(state => state.profileActions.userLoggedIn);
+    const [selectedColor, setSelectedColor] = useState('');
 
     const [quantityNumber, setQuantityNumber] = useState(1);
 
@@ -30,7 +32,7 @@ function ProductDetailInfo(props) {
     }
 
     return(
-        <View style={styles.detailInfoWrapper}>
+        <ScrollView style={styles.detailInfoWrapper}>
             <View style={styles.titleAndFavorites}>
                 <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>{selectedItem.title}</Text>
                 <AvgRating avgRating={selectedItem.avgRating} />
@@ -43,6 +45,9 @@ function ProductDetailInfo(props) {
                         defaultButtonText="Choose color"
                         buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 30, maxWidth: 120, marginTop: 15}}
                         buttonTextStyle={{fontSize: 13 ,color: "#fff"}}
+                        onSelect={(selectedItem, index) => {
+                            setSelectedColor(selectedItem)
+                        }}
                     />
             </View>
             <View style={styles.descriptionWrapper}>
@@ -63,10 +68,13 @@ function ProductDetailInfo(props) {
                     <Text style={{fontSize: 26, color:"#fff"}}>{`${selectedItem.price}€`}</Text>
                     <AddToCartButton 
                         item={selectedItem}
-                        quantityNumber={quantityNumber}  
+                        quantityNumber={quantityNumber}
+                        color={selectedColor}  
+                        productDetailPage={true}
                     />
-                </View>
-        </View>
+            </View>
+            <CommentForm />
+        </ScrollView>
     )
 }
 

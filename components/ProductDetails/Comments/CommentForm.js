@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native"
 import { ValidateFields } from "../../Profile/Validation/Validation";
 import PopupModal from "../../Modals/Popup";
+import { addCommentToDB } from "../../HttpRequests/httpRequests";
 
-function CommentForm() {
+function CommentForm(props) {
 
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
@@ -32,6 +33,8 @@ function CommentForm() {
         fieldPushHandler('email', email)
         fieldPushHandler('textArea', textArea)
 
+        let comment = {firstName: firstName, lastName: lastName, email: email, comment: textArea}
+
         let message = ValidateFields(fieldsArray);
 
         if(message !== "OK") {
@@ -41,6 +44,9 @@ function CommentForm() {
             message = "Comment added successfully!"
             setErrorMessage(message);
             setModalVisible(true);
+
+            addCommentToDB(props.selectedItemKey, comment);
+
             setFieldsArray([]);
             setFirstName('');
             setLastName('');

@@ -73,7 +73,7 @@ function ProductDetailInfo(props) {
                         productDetailPage={true}
                     />
             </View>
-            <CommentForm />
+            <CommentForm selectedItemKey={selectedItemKey}/>
         </ScrollView>
     )
 }

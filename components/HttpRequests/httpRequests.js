@@ -31,6 +31,10 @@ export async function updateProduct(productKey, newProduct) {
     axios.put(URL + `products/${productKey}.json`, newProduct);
 }
 
+export async function addCommentToDB(productKey, comment) {
+    axios.post(URL + `products/${productKey}/comments.json`, comment);
+}
+
 //User reqeusts
 
 export async function fetchUsers() {

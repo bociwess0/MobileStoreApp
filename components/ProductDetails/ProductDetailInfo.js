@@ -8,6 +8,7 @@ import FavoritesButton from "./LoggedUsersOnly/FavoritesButton";
 import AvgRating from "./Rate/AvgRating";
 import RateButton from "./Rate/RateButton";
 import CommentForm from "./Comments/CommentForm";
+import AvailabilityInStores from "./Stores/AvailabilityInStores";
 
 function ProductDetailInfo(props) {
 
@@ -73,6 +74,7 @@ function ProductDetailInfo(props) {
                         productDetailPage={true}
                     />
             </View>
+            <AvailabilityInStores stores={selectedItem.stores} />
             <CommentForm selectedItemKey={selectedItemKey}/>
         </ScrollView>
     )

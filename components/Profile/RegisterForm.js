@@ -1,11 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
-import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { KeyboardAvoidingView, Pressable, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
 import { registerUser } from "../../redux/profileSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUserToDB } from "../HttpRequests/httpRequests";
+import { KeyboardAvoidingScrollView } from "react-native-keyboard-avoiding-scroll-view";
 
 function RegisterForm() {
 
@@ -94,8 +95,8 @@ function RegisterForm() {
 
 
     return (
-        <View style={styles.registerForm}>
-            <Text style={{fontSize: 24, color: "#B4236C", textAlign: "center", fontWeight: 500}} >Registration</Text>
+        <KeyboardAvoidingScrollView style={styles.registerForm}>
+            <Text style={{fontSize: 24, color: "#B4236C", textAlign: "center", fontWeight: 500, marginBottom: 20}} >Registration</Text>
             <View style={{display: "flex", flexDirection: "column", justifyContent: "center",alignItems: "center", gap: 15}}>
                 <TextInput style={styles.inputContainer} placeholder="First Name" placeholderTextColor="#fff" onChangeText={(text) => setFirstName(text)} />
                 <TextInput style={styles.inputContainer} placeholder="Last Name" placeholderTextColor="#fff" onChangeText={(text) => setLastName(text)} />
@@ -112,7 +113,7 @@ function RegisterForm() {
                 </Pressable>
             </View>
             <ValidationPopup modalVisible={modalVisible} message={errorMessage} onCloseModal={closePopupHandler} onGoToLogin={goToLoginPage}/>
-        </View>
+        </KeyboardAvoidingScrollView>
     )
 }
 

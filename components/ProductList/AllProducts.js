@@ -9,7 +9,16 @@ export const allProducts = [
         price: 895,
         quantity: 0,
         colors: ["red"],
-        stores: ["Galerija SC, Beo SC"],
+        stores: [
+            {
+                name: "Galerija SC",
+                image: require("../../assets/Stores/galerija_tc.jpg"),
+            },
+            {
+                name: "Beo SC",
+                image: require("../../assets/Stores/beo_tc.jpg"),
+            },
+        ],
         avgRating: 0,
         images: [
             require("../../assets/Products/iphone-15.jpg"),
@@ -28,7 +37,16 @@ export const allProducts = [
         price: 895,
         quantity: 0,
         colors: ["black", "white"],
-        stores: ["SC Usce, Beo SC"],
+        stores: [
+            {
+                name: "SC Ušće",
+                image: require("../../assets/Stores/usce_tc.jpg"),
+            },
+            {
+                name: "Beo SC",
+                image: require("../../assets/Stores/beo_tc.jpg"),
+            },
+        ],
         avgRating: 0,
         images: [
             require("../../assets/Products/galaxy-s23.jpg"),
@@ -46,7 +64,16 @@ export const allProducts = [
         price: 1000,
         quantity: 0,
         colors: ["green"],
-        stores: ["BIG, Beo SC"],
+        stores: [
+            {
+                name: "BIG TC",
+                image: require("../../assets/Stores/big_tc.jpg"),
+            },
+            {
+                name: "Galerija SC",
+                image: require("../../assets/Stores/galerija_tc.jpg"),
+            },
+        ],
         avgRating: 0,
         images: [
             require("../../assets/Products/xiaomi-14-pro.jpg"),
@@ -64,7 +91,12 @@ export const allProducts = [
         price: 990,
         quantity: 0,
         colors: ["gray"],
-        stores: ["Delta City"],
+        stores: [
+            {
+                name: "Delta City",
+                image: require("../../assets/Stores/delta_tc.jpg"),
+            },
+        ],
         avgRating: 0,
         images: [
             require("../../assets/Products/huawei-mate-60-pro.jpg"),

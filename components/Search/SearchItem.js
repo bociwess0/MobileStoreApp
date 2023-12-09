@@ -30,12 +30,6 @@ function SearchItem(props) {
                         <Text style={{fontSize: 14, color: "#944AD4"}}>View More</Text>
                     </Pressable>
                 </View>
-                <SelectDropdown 
-                    data={props.item.item.colors}
-                    defaultValue="Choose color"
-                    buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 100, marginTop: 15}}
-                    buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
-                />
                 <View style={styles.priceAndButton}>
                     <Text style={{fontSize: 14, color:"#fff"}}>{`${props.item.item.price}€`}</Text>
                 

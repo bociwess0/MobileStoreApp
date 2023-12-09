@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import ValidationPopup from "../../Modals/ValidationPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ValidateFields } from "../Validation/Validation";
 import { updateUser } from "../../../redux/profileSlice";
@@ -9,20 +9,30 @@ import { addToFavoritesDB, updateUserInDB } from "../../HttpRequests/httpRequest
 function EditProfile() {
 
     const dispatch = useDispatch();
-
+    
     const loggedUser = useSelector(state => state.profileActions.loggedUser);
     const favoriteProducts = useSelector(state => state.profileActions.favoriteProducts);
-    const [firstName, setFirstName] = useState(loggedUser.firstName);
-    const [lastName, setLastName] = useState(loggedUser.lastName);
-    const [email, setEmail] = useState(loggedUser.email);
-    const [password, setPassword] = useState(loggedUser.password);
-    const [address, setAddress] = useState(loggedUser.address);
-    const [city, setCity] = useState(loggedUser.city);
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
 
     const [modalVisible, setModalVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
     const [fieldsArray, setFieldsArray] = useState([]);
+
+    useEffect(() => {
+        // Set initial state once the component has mounted
+        setFirstName(loggedUser.user.firstName);
+        setLastName(loggedUser.user.lastName);
+        setEmail(loggedUser.user.email);
+        setPassword(loggedUser.user.password);
+        setAddress(loggedUser.user.address);
+        setCity(loggedUser.user.city);
+      }, [loggedUser]);
 
     function fieldPushHandler(type, text) {
         fieldsArray.push({
@@ -60,6 +70,8 @@ function EditProfile() {
             setFieldsArray([]);
         } else {
             message = "You have successfully modified your data!"
+
+            console.log(loggedUser);
             
             dispatch(updateUser({user: user}))
             await updateUserInDB({id: loggedUser.id, user: user});

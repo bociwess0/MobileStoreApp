@@ -7,13 +7,6 @@ import { allProducts } from "../ProductList/AllProducts";
 
 function SearchModal() {
 
-    const dispatch = useDispatch();
-    let searchVisible = useSelector(state => state.searchActions.searchActive);
-
-    function closeSearchHandler() {
-        dispatch(hideSearch());
-    }
-
     function searchInputHandler(enteredText) {
         setSearchInput(enteredText);
         searchDispatch({type: 'filterSearchProducts', payload: { text: enteredText}});
@@ -23,8 +16,10 @@ function SearchModal() {
         if(action.type === 'filterSearchProducts') {
             let resultProducts = [];
             let enteredText = action.payload.text.toLowerCase();
-            resultProducts = allProducts.filter((product) => (product.title.toLowerCase().includes(enteredText) || product.brand.toLowerCase().includes(enteredText)));
-            return resultProducts;
+            if(enteredText !== "") {
+                resultProducts = allProducts.filter((product) => (product.title.toLowerCase().includes(enteredText) || product.brand.toLowerCase().includes(enteredText)));
+                return resultProducts;
+            } else return [];
         }
     }
 
@@ -34,7 +29,7 @@ function SearchModal() {
     return(
         <View style={styles.searchContainer} >
                 <View style={styles.inputAndCloseWrapper}>
-                    <TextInput style={{color: "#ffffff"}} placeholder="Search product..." placeholderTextColor="#e2e2e2" onChangeText={searchInputHandler}/>
+                    <TextInput style={{color: "#ffffff", width: "100%"}} placeholder="Search product..." placeholderTextColor="#e2e2e2" onChangeText={searchInputHandler}/>
                 </View>
                 <SearchResults products = {state} />
         </View>

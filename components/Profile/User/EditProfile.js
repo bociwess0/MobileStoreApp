@@ -60,16 +60,15 @@ function EditProfile() {
             setFieldsArray([]);
         } else {
             message = "You have successfully modified your data!"
-            setErrorMessage(message);
-            setModalVisible(true);
+            
             dispatch(updateUser({user: user}))
             await updateUserInDB({id: loggedUser.id, user: user});
             for(const product of favoriteProducts) {
                 await addToFavoritesDB(product);
                 
             }
-            const usersArray = await fetchUsers();
-            dispatch(importUsers({users: usersArray}))
+            setErrorMessage(message);
+            setModalVisible(true);
             setFieldsArray([]);
         }
     }

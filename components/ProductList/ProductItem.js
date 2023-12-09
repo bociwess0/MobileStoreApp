@@ -31,8 +31,8 @@ function ProductItem(props) {
                 </View>
                 <SelectDropdown 
                     data={props.item.item.product.colors}
-                    defaultValue="Choose color"
-                    buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 100, marginTop: 15}}
+                    defaultButtonText="Choose color"
+                    buttonStyle={{backgroundColor: "rgba(211, 77, 68, 0.5)", borderColor: "#D34D44", borderWidth: 1, borderRadius: 20, maxHeight: 25, maxWidth: 130, marginTop: 15}}
                     buttonTextStyle={{fontSize: 12 ,color: "#fff"}}
                     onSelect={(selectedItem, index) => {
                         setSelectedColor(selectedItem)

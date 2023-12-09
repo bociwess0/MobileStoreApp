@@ -23,8 +23,8 @@ const profileSlice = createSlice({
             state.favoriteProducts = [];
         },
         registerUser: (state, action) => {
+            console.log(action.payload.user);
             state.users.push(action.payload.user);
-            state.userLoggedIn = true;
         },
         loginUser: (state, action) => {
             state.loggedUser = state.users.find((user) => user.user.email === action.payload.user.email);

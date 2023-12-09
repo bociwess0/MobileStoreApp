@@ -61,11 +61,12 @@ function CommentForm(props) {
             <Text style={{fontSize: 20, color: "#fff"}}>Leave a comment</Text>
             <View style={styles.commentFormContent}>
                 <View style={{display: "flex", flexDirection: "row", gap: 15}}>
-                    <TextInput style={[styles.inputContainer, {width: "50%"}]} placeholder="First Name" placeholderTextColor="#fff" onChangeText={(text) => setFirstName(text)} />
-                    <TextInput style={[styles.inputContainer, {width: "45%"}]} placeholder="Last Name" placeholderTextColor="#fff" onChangeText={(text) => setLastName(text)} />
+                    <TextInput style={[styles.inputContainer, {width: "50%"}]} value={firstName} placeholder="First Name" placeholderTextColor="#fff" onChangeText={(text) => setFirstName(text)} />
+                    <TextInput style={[styles.inputContainer, {width: "45%"}]} value={lastName} placeholder="Last Name" placeholderTextColor="#fff" onChangeText={(text) => setLastName(text)} />
                 </View>
-                <TextInput style={styles.inputContainer} placeholder="Email" placeholderTextColor="#fff" onChangeText={(text) => setEmail(text)} />
+                <TextInput style={styles.inputContainer} placeholder="Email" value={email} placeholderTextColor="#fff" onChangeText={(text) => setEmail(text)} />
                 <TextInput
+                    value={textArea}
                     style={styles.textArea}
                     placeholder="Type your comment here..."
                     multiline

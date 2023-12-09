@@ -58,8 +58,9 @@ export async function fetchUsers() {
 
 export async function registerUserToDB(newUser) {
 
-    axios.post(URL + `users.json`, newUser);
-
+    const resposne = await axios.post(URL + `users.json`, newUser);
+    const userKey = resposne.data.name
+    return userKey;
 }
 
 export async function updateUserInDB(user) {

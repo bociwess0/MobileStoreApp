@@ -29,7 +29,7 @@ function Products({navigation}) {
                     }
                 }
                 keyExtractor={item => item.product.id}
-                style={[styles.productsWrapper, {height: height - 120}]}
+                style={[styles.productsWrapper, {height: height - 140}]}
             />
       </View>
 

@@ -10,6 +10,8 @@ import { registerUserToDB } from "../HttpRequests/httpRequests";
 function RegisterForm() {
 
     const navigation = useNavigation();
+    const allUsers = useSelector(state => state.profileActions.users)
+
     const dispatch = useDispatch();
 
     function goToLogin() {
@@ -40,7 +42,12 @@ function RegisterForm() {
         })
     }
 
-    function SubmitHandler() {
+    function userExist(newUser) {
+        const foundUser = allUsers.find((user) => user.user.email === newUser.email);
+        return foundUser
+    }
+
+    async function SubmitHandler() {
         fieldPushHandler('firstName', firstName);
         fieldPushHandler('lastName', lastName)
         fieldPushHandler('email', email)
@@ -64,13 +71,22 @@ function RegisterForm() {
             setErrorMessage(message);
             setGoToLoginPage(false)
         } else {
-            message = "Registration successful! You can now login."
-            registerUserToDB(user);
-            dispatch(registerUser({user: user}));
+            
+            if(!userExist(user)) {
+                message = "Registration successful! You can now login."
+                let userKey = await registerUserToDB(user);
+                let userObj = {
+                    id: userKey,
+                    user: user
+                }
+                dispatch(registerUser({user: userObj }));
+                setGoToLoginPage(true)
+            } else {
+                message = "This email already exists in system!"
+            }
+            
             setErrorMessage(message);
-            setGoToLoginPage(true)
             setModalVisible(true);
-            setFieldsArray([]);
         }
 
         setFieldsArray([]);

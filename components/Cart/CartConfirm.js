@@ -20,7 +20,7 @@ function CartConfirm(props) {
     }
 
     return(
-        <View style={{height: height - 140, padding: 20}}>
+        <View style={{height: height - 140, padding: 10}}>
             <FlatList 
                     data={props.productsInCart}
                     renderItem={(product) => {

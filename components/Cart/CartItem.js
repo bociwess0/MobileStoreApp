@@ -17,6 +17,7 @@ function CartItem(props) {
                 <Text style={styles.title} >{props.item.item.title}</Text>
                 <View style={styles.brandAndViewMore}>
                     <Text style={styles.brand} >{props.item.item.brand}</Text>
+                    <View style={{backgroundColor: `${props.item.item.selectedColor}`, width: 20, height: 20, borderRadius: 50, borderColor: "#BA2AE4", borderWidth: 1}}></View>
                 </View>
 
                 <View style={styles.priceAndQuantity}>

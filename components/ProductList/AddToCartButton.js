@@ -14,10 +14,17 @@ function AddToCartButton(props) {
     const fontSize = props.productDetailPage ? 18 : 14
 
     function handleAddToCart() {
+
         if(typeof props.color !== "undefined" && props.color !== '') {
+
+            let newProduct = {
+                ...props.item,
+                selectedColor: props.color
+            }
+
             if(typeof props.quantityNumber !== "undefined") {
-                dispatch(addToCart({item: props.item, quantityNumber: props.quantityNumber}))
-            } else dispatch(addToCart({item: props.item, quantityNumber: 1}))
+                dispatch(addToCart({item: newProduct, quantityNumber: props.quantityNumber}))
+            } else dispatch(addToCart({item: newProduct, quantityNumber: 1}))
         } else {
             handleModal();
         }

@@ -66,7 +66,7 @@ function Cart() {
                             )
                         }
                     }
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => Math.random()}
                     style={[styles.productsWrapper, {height: userLoggedIn ? height - 320 : height - 260}]}
                 />
             }

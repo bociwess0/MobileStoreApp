@@ -14,7 +14,7 @@ const cartSlice = createSlice({
             let addedProductsIndex = state.cartItems.findIndex((item) => item.id === addedProduct.id);
             let quantityNumber = action.payload.quantityNumber
           
-            if (addedProductsIndex !== -1) {
+            if (addedProductsIndex !== -1 && addedProduct.selectedColor=== state.cartItems[addedProductsIndex].selectedColor) {
                 state.cartItems[addedProductsIndex].quantity += quantityNumber;
             } else {
                 let newProduct = {
@@ -30,7 +30,7 @@ const cartSlice = createSlice({
         },
         
         removeFromCart: (state, action) => {
-            state.cartItems = state.cartItems.filter((item) => item.id !== action.payload.item.id);
+            state.cartItems = state.cartItems.filter((item) => !(item.id === action.payload.item.id && item.selectedColor === action.payload.item.selectedColor));
             state.cartTotal -= action.payload.item.price * action.payload.item.quantity;
             state.cartTotalQuantity -= action.payload.item.quantity;
         },

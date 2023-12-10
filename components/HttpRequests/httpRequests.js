@@ -99,7 +99,7 @@ export async function fetchFavorites(userKey) {
 // Email Sender
 
 export const sendEmail = async (email, code) => {
-    const apiKey = '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'; 
+    const apiKey = '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'; 
     const apiUrl = 'https://api.sendgrid.com/v3/mail/send';
 
     const headers = {

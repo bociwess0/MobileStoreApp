@@ -36,7 +36,7 @@ function ProductDetailInfo(props) {
         <ScrollView style={styles.detailInfoWrapper}>
             <View style={styles.titleAndFavorites}>
                 <Text style={{fontSize: 26, lineHeight: 30, color: "#fff", marginTop: 3}}>{selectedItem.title}</Text>
-                <AvgRating avgRating={selectedItem.avgRating} />
+                {selectedItem.avgRating > 0 && <AvgRating avgRating={selectedItem.avgRating} />}
                 {userLoggedIn && <FavoritesButton product={selectedItem} />}
             </View>
             <View style={styles.brandAndColor}>

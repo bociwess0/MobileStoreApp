@@ -1,4 +1,4 @@
-import { View, StyleSheet, FlatList, useWindowDimensions, Text } from "react-native";
+import { View, StyleSheet, FlatList, useWindowDimensions, Text, Keyboard } from "react-native";
 import CartItem from "../components/Cart/CartItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
@@ -14,7 +14,7 @@ import CouponItem from "../components/Coupons/CouponItem";
 
 function Cart() {
 
-    const {width, height} = useWindowDimensions();
+    let {width, height} = useWindowDimensions();
 
     let updatedProducts = useSelector(state => state.cartActions.cartItems);
     let cartConfirmActive = useSelector(state => state.cartActions.cartConfirmActive)
@@ -49,6 +49,30 @@ function Cart() {
         setProductsInCart(updatedProducts);
     }, [updatedProducts])
 
+    const [isKeyboardVisible, setKeyboardVisible] = useState(false);
+
+    useEffect(() => {
+        const keyboardDidShowListener = Keyboard.addListener(
+        'keyboardDidShow',
+        () => {
+            setKeyboardVisible(true);
+        }
+        );
+        const keyboardDidHideListener = Keyboard.addListener(
+        'keyboardDidHide',
+        () => {
+            setKeyboardVisible(false);
+        }
+        );
+
+        return () => {
+        keyboardDidShowListener.remove();
+        keyboardDidHideListener.remove();
+        };
+    }, []);
+
+    height = userLoggedIn ? height - 320 : height - 260;
+    height = isKeyboardVisible ? height - 80 : height - 0;
 
     return(
         <View style={{backgroundColor: "#100156", paddingBottom: 20}} >
@@ -67,11 +91,11 @@ function Cart() {
                         }
                     }
                     keyExtractor={item => Math.random()}
-                    style={[styles.productsWrapper, {height: userLoggedIn ? height - 320 : height - 260}]}
+                    style={[styles.productsWrapper, {height: height}]}
                 />
             }
             {productsInCart.length === 0 &&
-                <View style={{height: height - 140, padding: 20}}>
+                <View style={{height: "100%", padding: 20}}>
                     <Text style={{fontSize: 18, color: "#fff"}}>Cart is empty.</Text>
                 </View> 
             }

@@ -4,8 +4,9 @@ import { Pressable, StyleSheet, Text, TextInput, View } from "react-native";
 import { ValidateFields } from "./Validation/Validation";
 import ValidationPopup from "../Modals/ValidationPopup";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserInDB } from "../HttpRequests/httpRequests";
+import { sendEmail, updateUserInDB } from "../HttpRequests/httpRequests";
 import { updateUser } from "../../redux/profileSlice";
+import LoadingOverlay from "../../Layout/LoadingOverlay";
 
 
 function ForgotPassword() {
@@ -27,13 +28,18 @@ function ForgotPassword() {
     const [goToLoginPage, setGoToLoginPage] = useState(false);
 
     const [codeSent, setCodeSent] = useState(false);
+    const [isCodeCorrect, setIsCodeCorrect] = useState(false);
+    const [passwordCode, setPasswordCode] = useState('');
+    const [enteredCode, setEnteredCode] = useState('');
+
+    const [isLoading, setIsLoading] = useState(false);
 
 
     //functions
 
     const generateRandomString = () => {
         const length = 5;
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        const characters = '0123456789';
         let result = '';
       
         for (let i = 0; i < length; i++) {
@@ -67,7 +73,7 @@ function ForgotPassword() {
 
     }
 
-    function VerifyEmail() {
+    async function VerifyEmail() {
         fieldPushHandler('email', enteredEmail)
         let message = ValidateFields(fieldsArray);
 
@@ -78,11 +84,39 @@ function ForgotPassword() {
         } else if(message === "OK" && !userExists(enteredEmail)) {
             setModalVisible(true);
             setErrorMessage("User with this email does not exists.");
-            setGoToLoginPage(false)
-        } else {
+            setGoToLoginPage(false) }
+        else {
+            const passCode = generateRandomString();
+            setPasswordCode(passCode);
+            setIsLoading(true);
+            await sendEmail(enteredEmail, passCode);
+            setIsLoading(false);
             setCodeSent(true);
         }
 
+        setFieldsArray([]);
+    }
+
+    function VerifyCode() {
+        fieldPushHandler('passwordCode', passwordCode)
+        let message = ValidateFields(fieldsArray);
+
+        if(message !== "OK") {
+            setModalVisible(true);
+            setErrorMessage(message);
+            setGoToLoginPage(false)
+        } else {
+            if(enteredCode === passwordCode) {
+                setIsCodeCorrect(true);
+            } else {
+                message = "Invalid code!";
+                setModalVisible(true);
+                setErrorMessage(message);
+                setIsCodeCorrect(false);
+            }
+            
+        }
+        
         setFieldsArray([]);
     }
 
@@ -114,16 +148,22 @@ function ForgotPassword() {
                         password: newPassword
                     }
                 }
+                console.log(userNewInfo);
                 await updateUserInDB(userNewInfo);
                 dispatch(updateUser({user: userNewInfo.user}));
-                message = "Password is successfully changed! You can now login."
+                message = "Password changed successfully!";
                 setErrorMessage(message);
+                setGoToLoginPage(true)
                 setModalVisible(true);
                 setCodeSent(true);
                 setFieldsArray([]);
             }
         }
         setFieldsArray([]);
+    }
+    
+    if(isLoading) {
+        return <LoadingOverlay />
     }
 
     return (
@@ -134,9 +174,13 @@ function ForgotPassword() {
                 {!codeSent && <Pressable style={({pressed}) => [styles.loginButton, {opacity: pressed ? 0.7 : 1}]} onPress={VerifyEmail} >
                                 <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>VERIFY EMAIL</Text>
                             </Pressable>}
-                {codeSent && <TextInput style={styles.inputContainer} placeholder="New Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setNewPassword(text)}/>}
-                {codeSent && <TextInput style={styles.inputContainer} placeholder="Retype Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setRetypedPassword(text)} />}
-                {codeSent && <Pressable style={styles.loginButton}onPress={SubmitHandler} >
+                {codeSent && !isCodeCorrect && <TextInput style={styles.inputContainer} placeholder="Enter code here" placeholderTextColor="#fff" onChangeText={(text) => setEnteredCode(text)} />}
+                {codeSent && !isCodeCorrect && <Pressable style={({pressed}) => [styles.loginButton, {opacity: pressed ? 0.7 : 1}]} onPress={VerifyCode} >
+                    <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>VERIFY CODE</Text>
+                </Pressable>}
+                {codeSent && isCodeCorrect && <TextInput style={styles.inputContainer} placeholder="New Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setNewPassword(text)}/>}
+                {codeSent && isCodeCorrect && <TextInput style={styles.inputContainer} placeholder="Retype Password" placeholderTextColor="#fff"  secureTextEntry={true} onChangeText={(text) => setRetypedPassword(text)} />}
+                {codeSent && isCodeCorrect && <Pressable style={styles.loginButton}onPress={SubmitHandler} >
                                 <Text style={{fontSize: 20, color: "#fff", textAlign: "center", fontWeight: 500}}>CHANGE PASSWORD</Text>
                             </Pressable>}
                 <Pressable onPress={goToLogin}>

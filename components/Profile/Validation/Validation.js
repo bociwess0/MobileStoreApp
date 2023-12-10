@@ -40,9 +40,9 @@ export const ValidateFields = (fields) => {
 }
 
 
-export const ValidateUser = (email, listOfUsers) => {
+export const ValidateUser = (email, password, listOfUsers) => {
 
-    const userExists = listOfUsers.find((user) => user.user.email === email);
+    const userExists = listOfUsers.find((user) => (user.user.email === email & user.user.password === password));
 
     return (typeof userExists !== "undefined") ? true : false;
 

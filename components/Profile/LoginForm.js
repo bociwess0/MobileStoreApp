@@ -54,7 +54,7 @@ function LoginForm() {
             setModalVisible(true);
             setErrorMessage(message);
         } else {
-            if(ValidateUser(email, reigsteredUsers)) {
+            if(ValidateUser(email, password, reigsteredUsers)) {
                 message = "Login successful!";
                 setErrorMessage(message);
                 setModalVisible(true);
@@ -68,7 +68,7 @@ function LoginForm() {
                 }))
             } else {
                 setModalVisible(true);
-                setErrorMessage("User not exists.");
+                setErrorMessage("Incorrect email or password.");
             }
         }
         setFieldsArray([]);

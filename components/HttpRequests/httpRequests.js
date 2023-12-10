@@ -95,3 +95,40 @@ export async function fetchFavorites(userKey) {
     return favoritesArray;
 
 }
+
+// Email Sender
+
+export const sendEmail = async (email, code) => {
+    const apiKey = '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'; 
+    const apiUrl = 'https://api.sendgrid.com/v3/mail/send';
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${apiKey}`,
+    };
+
+    const payload = {
+      personalizations: [
+        {
+          to: [{ email: email }],
+        },
+      ],
+      from: { email: 'mobileapp@yopmail.com' },
+      subject: 'Password code',
+      content: [
+        { type: 'text/plain', value: `This is your password code: ${code}` },
+      ],
+    };
+
+    try {
+      const response = await axios.post(apiUrl, payload, { headers });
+
+      if (response.status === 202) {
+        console.log('Email sent successfully');
+      } else {
+        console.log(`Failed to send email. Status code: ${response.status}`);
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+};

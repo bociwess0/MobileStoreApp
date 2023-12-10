@@ -59,6 +59,7 @@ const profileSlice = createSlice({
 
             if(foundedUserIndex !== -1) {
                 state.users[foundedUserIndex].user = newUser;
+                console.log(state.users[foundedUserIndex].user);
             }
 
         },

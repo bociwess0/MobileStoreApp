@@ -106,4 +106,21 @@ export const allProducts = [
         description: "The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout." + 
         " A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content."
     }, 
+    {
+        id: 5,
+        index: 4,
+        title: "Honor 70",
+        brand: "Huawei",
+        price: 700,
+        quantity: 0,
+        colors: ["gray", "gold"],
+        stores: [],
+        avgRating: 0,
+        images: [
+            require("../../assets/Products/honor-70-1.jpg"),
+            require("../../assets/Products/honor-70-2.png"),
+        ],
+        description: "The purpose of lorem ipsum is to create a natural looking block of text (sentence, paragraph, page, etc.) that doesn't distract from the layout." + 
+        " A practice not without controversy, laying out pages with meaningless filler text can be very useful when the focus is meant to be on design, not content."
+    }, 
 ]
